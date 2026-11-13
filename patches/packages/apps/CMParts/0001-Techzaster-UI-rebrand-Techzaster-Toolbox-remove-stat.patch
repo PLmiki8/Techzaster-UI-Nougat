@@ -1,0 +1,2617 @@
+From fb3c6e5d1060d991cdb4b9c40d9994e9b227ec64 Mon Sep 17 00:00:00 2001
+From: plmiki8 <350455311+PLmiki8@users.noreply.github.com>
+Date: Mon, 2 Nov 2026 17:37:19 +0100
+Subject: [PATCH] Techzaster UI: rebrand, Techzaster Toolbox, remove statistics
+
+Change-Id: I200daa1486d8fdd060f514c5cd5f86b634edc94a
+---
+ AndroidManifest.xml                           | 21 --------
+ res/values-af/strings.xml                     | 10 ++--
+ res/values-ar/strings.xml                     | 12 ++---
+ res/values-ast-rES/strings.xml                |  4 +-
+ res/values-az-rAZ/strings.xml                 | 12 ++---
+ res/values-az/strings.xml                     | 12 ++---
+ res/values-be-rBY/strings.xml                 |  4 +-
+ res/values-be/strings.xml                     |  4 +-
+ res/values-bg/strings.xml                     |  8 +--
+ res/values-ca/strings.xml                     | 10 ++--
+ res/values-cs/strings.xml                     | 10 ++--
+ res/values-csb-rPL/strings.xml                |  2 +-
+ res/values-cy/strings.xml                     | 10 ++--
+ res/values-da/strings.xml                     | 12 ++---
+ res/values-de/strings.xml                     | 10 ++--
+ res/values-el/strings.xml                     | 12 ++---
+ res/values-en-rAU/strings.xml                 | 12 ++---
+ res/values-en-rCA/strings.xml                 | 12 ++---
+ res/values-en-rGB/strings.xml                 | 12 ++---
+ res/values-en-rIN/strings.xml                 | 12 ++---
+ res/values-es-rUS/strings.xml                 | 10 ++--
+ res/values-es/strings.xml                     | 10 ++--
+ res/values-et-rEE/strings.xml                 |  2 +-
+ res/values-et/strings.xml                     |  2 +-
+ res/values-eu-rES/strings.xml                 | 10 ++--
+ res/values-eu/strings.xml                     | 10 ++--
+ res/values-fi/strings.xml                     | 10 ++--
+ res/values-fil-rPH/strings.xml                |  2 +-
+ res/values-fr/strings.xml                     | 10 ++--
+ res/values-frp-rIT/strings.xml                |  2 +-
+ res/values-fy-rNL/strings.xml                 | 10 ++--
+ res/values-gd-rGB/strings.xml                 |  2 +-
+ res/values-gd/strings.xml                     | 12 ++---
+ res/values-gl-rES/strings.xml                 | 10 ++--
+ res/values-gl/strings.xml                     | 10 ++--
+ res/values-hr/strings.xml                     | 10 ++--
+ res/values-hu/strings.xml                     | 10 ++--
+ res/values-in/strings.xml                     | 10 ++--
+ res/values-is-rIS/strings.xml                 |  2 +-
+ res/values-is/strings.xml                     |  2 +-
+ res/values-it/strings.xml                     | 10 ++--
+ res/values-iw/strings.xml                     | 10 ++--
+ res/values-ja/strings.xml                     | 10 ++--
+ res/values-ka-rGE/strings.xml                 |  4 +-
+ res/values-ka/strings.xml                     |  4 +-
+ res/values-ko/strings.xml                     | 10 ++--
+ res/values-mk-rMK/strings.xml                 | 10 ++--
+ res/values-mk/strings.xml                     | 10 ++--
+ res/values-nb/strings.xml                     | 10 ++--
+ res/values-nl/strings.xml                     | 10 ++--
+ res/values-oc-rFR/strings.xml                 |  2 +-
+ res/values-pl/strings.xml                     | 12 ++---
+ res/values-pt-rBR/strings.xml                 |  8 +--
+ res/values-pt-rPT/strings.xml                 | 10 ++--
+ res/values-ro/strings.xml                     | 10 ++--
+ res/values-ru/strings.xml                     |  8 +--
+ res/values-sc-rIT/strings.xml                 |  2 +-
+ res/values-sk/strings.xml                     | 10 ++--
+ res/values-sl/strings.xml                     | 12 ++---
+ res/values-sq-rAL/strings.xml                 | 10 ++--
+ res/values-sq/strings.xml                     | 10 ++--
+ res/values-sr-rCS/strings.xml                 |  2 +-
+ res/values-sr/strings.xml                     |  8 +--
+ res/values-sv/strings.xml                     |  6 +--
+ res/values-th/strings.xml                     | 10 ++--
+ res/values-tr/strings.xml                     | 10 ++--
+ res/values-uk/strings.xml                     | 10 ++--
+ res/values-vec-rIT/strings.xml                |  2 +-
+ res/values-vi/strings.xml                     | 10 ++--
+ res/values-zh-rCN/strings.xml                 | 10 ++--
+ res/values-zh-rTW/strings.xml                 | 10 ++--
+ res/values/arrays.xml                         |  7 +++
+ res/values/strings.xml                        | 19 ++++---
+ res/xml/parts_catalog.xml                     | 10 ++--
+ res/xml/privacy_settings.xml                  |  7 ---
+ res/xml/qs_grid_settings.xml                  | 16 ++++++
+ res/xml/status_bar_settings.xml               |  9 +++-
+ res/xml/toolbox_settings.xml                  | 49 +++++++++++++++++++
+ .../cmparts/statusbar/QsGridSettings.java     | 49 +++++++++++++++++++
+ .../cmparts/toolbox/ToolboxSettings.java      | 15 ++++++
+ 80 files changed, 454 insertions(+), 334 deletions(-)
+ create mode 100644 res/xml/qs_grid_settings.xml
+ create mode 100644 res/xml/toolbox_settings.xml
+ create mode 100644 src/org/cyanogenmod/cmparts/statusbar/QsGridSettings.java
+ create mode 100644 src/org/cyanogenmod/cmparts/toolbox/ToolboxSettings.java
+
+diff --git a/AndroidManifest.xml b/AndroidManifest.xml
+index a560cb6..220dbec 100644
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -184,30 +184,9 @@
+                 android:value="status_bar_settings" />
+         </activity-alias>
+ 
+-        <!-- Anonymous Statistics -->
+-        <receiver android:name=".cmstats.ReportingServiceManager"
+-            android:enabled="true"
+-            android:exported="false"
+-            android:label="ReportingServiceManager">
+-            <intent-filter>
+-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+-                <action android:name="org.cyanogenmod.cmparts.action.TRIGGER_REPORT_METRICS" />
+-            </intent-filter>
+-        </receiver>
+ 
+-        <service android:label="ReportingService"
+-            android:enabled="true"
+-            android:exported="false"
+-            android:name=".cmstats.ReportingService">
+-        </service>
+ 
+-        <service android:name=".cmstats.StatsUploadJobService"
+-                 android:permission="android.permission.BIND_JOB_SERVICE" />
+ 
+-        <service android:name=".cmstats.ReportingService"
+-                 android:label="ReportingService"
+-                 android:enabled="true"
+-                 android:exported="false" />
+ 
+ 		<!-- Weather settings -->
+         <activity-alias
+diff --git a/res/values-af/strings.xml b/res/values-af/strings.xml
+index d0b0d61..b6c9064 100644
+--- a/res/values-af/strings.xml
++++ b/res/values-af/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS instellings</string>
++    <string name="cmparts_title">Techzaster UI instellings</string>
+     <string name="loading">Laai tans\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Kanselleer</string>
+@@ -402,10 +402,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Totale bydraers:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Totale commits:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Laaste opgedateer:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS statistieke</string>
+-    <string name="anonymous_statistics_summary">Help om LineageOS beter maak deur anonieme statistieke verslaggewing aan te skakel</string>
++    <string name="anonymous_statistics_title">Techzaster UI statistieke</string>
++    <string name="anonymous_statistics_summary">Help om Techzaster UI beter maak deur anonieme statistieke verslaggewing aan te skakel</string>
+     <string name="anonymous_statistics_warning_title">Meer oor</string>
+-    <string name="anonymous_statistics_warning">Deur LineageOS statistieke toe te laat sal nie-persoonlike data ingestuur word na die ontwikkelaars van LineageOS. Die inligting sluit in \'n unieke identifikasie nommer wat nie jou privaatheid of persoonlike data in gevaar stel nie. Die data word ingestuur tydens elke \'boot\'.\n\nVir \'n voorbeeld van die data wat ingestuur word, tik op Voorskou Data.</string>
++    <string name="anonymous_statistics_warning">Deur Techzaster UI statistieke toe te laat sal nie-persoonlike data ingestuur word na die ontwikkelaars van Techzaster UI. Die inligting sluit in \'n unieke identifikasie nommer wat nie jou privaatheid of persoonlike data in gevaar stel nie. Die data word ingestuur tydens elke \'boot\'.\n\nVir \'n voorbeeld van die data wat ingestuur word, tik op Voorskou Data.</string>
+     <string name="enable_reporting_title">Aktiveer verslaggewing</string>
+     <string name="preview_data_title">Voorbeeld van gegewens</string>
+     <string name="view_stats_title">Bekyk statistiek</string>
+diff --git a/res/values-ar/strings.xml b/res/values-ar/strings.xml
+index 25bdd77..420b0a6 100644
+--- a/res/values-ar/strings.xml
++++ b/res/values-ar/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">إعدادات LineageOS</string>
++    <string name="cmparts_title">إعدادات Techzaster UI</string>
+     <string name="loading">تحميل</string>
+     <string name="dlg_ok">موافق</string>
+     <string name="cancel">إلغاء</string>
+@@ -420,11 +420,11 @@
+     <string name="contributions_info_msg"><![CDATA[<b>إجمالي المساهمين:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+ <b>إجمالي المساهمات:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+ <b>آخر تحديث:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">إحصائيات LineageOS</string>
+-    <string name="anonymous_statistics_summary">ساهم في جعل LineageOS أفضل بإرسال تقارير الإحصائيات بدون إرسال معلوماتك الشخصية</string>
++    <string name="anonymous_statistics_title">إحصائيات Techzaster UI</string>
++    <string name="anonymous_statistics_summary">ساهم في جعل Techzaster UI أفضل بإرسال تقارير الإحصائيات بدون إرسال معلوماتك الشخصية</string>
+     <string name="anonymous_statistics_warning_title">حول</string>
+-    <string name="anonymous_statistics_warning">سيسمح الاشتراك في إحصائيات LineageOS بتقديم البيانات غير الشخصية إلى
+-        مطوري LineageOS لتعقب المنشآت الفريدة عبر الأجهزة. تتضمن المعلومات المقدمة معرفًا فريدًا ،
++    <string name="anonymous_statistics_warning">سيسمح الاشتراك في إحصائيات Techzaster UI بتقديم البيانات غير الشخصية إلى
++        مطوري Techzaster UI لتعقب المنشآت الفريدة عبر الأجهزة. تتضمن المعلومات المقدمة معرفًا فريدًا ،
+         مما لا يؤثر على خصوصيتك أو بياناتك الشخصية. يتم إرسال البيانات أثناء كل عملية تمهيد. \n\nللحصول على مثال للبيانات التي يتم إرسالها ، انقر على معاينة البيانات.</string>
+     <string name="enable_reporting_title">تفعيل إرسال التقارير</string>
+     <string name="preview_data_title">معاينة البيانات</string>
+diff --git a/res/values-ast-rES/strings.xml b/res/values-ast-rES/strings.xml
+index 143db56..d686fe0 100644
+--- a/res/values-ast-rES/strings.xml
++++ b/res/values-ast-rES/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Axustes de LineageOS</string>
++    <string name="cmparts_title">Axustes de Techzaster UI</string>
+     <string name="loading">Cargando\u2026</string>
+     <string name="dlg_ok">D\'acuerdu</string>
+     <string name="cancel">Encaboxar</string>
+diff --git a/res/values-az-rAZ/strings.xml b/res/values-az-rAZ/strings.xml
+index 7da6f63..90d6ba9 100644
+--- a/res/values-az-rAZ/strings.xml
++++ b/res/values-az-rAZ/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -17,7 +17,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Tənzimləmələri</string>
++    <string name="cmparts_title">Techzaster UI Tənzimləmələri</string>
+     <string name="loading">Yüklənir\u2026</string>
+     <string name="dlg_ok">Oldu</string>
+     <string name="cancel">İmtina</string>
+@@ -421,11 +421,11 @@
+     <string name="contributions_info_msg">&lt;b&gt;Bütün töhvə verənlər:&lt;/b&gt; &lt;xliff:g id="total_contributors"&gt;%1$s&lt;/xliff:g&gt;&lt;br/&gt;&lt;br/&gt;
+                  &lt;b&gt;Bütün daxil edilənlər:&lt;/b&gt; &lt;xliff:g id="total_commits"&gt;%2$s&lt;/xliff:g&gt;&lt;br/&gt;&lt;br/&gt;
+                  &lt;b&gt;Son yeniləmə:&lt;/b&gt; &lt;xliff:g id="date"&gt;%3$s&lt;/xliff:g&gt;</string>
+-    <string name="anonymous_statistics_title">LineageOS statistikaları</string>
+-    <string name="anonymous_statistics_summary">Anonim statistika göndərməni tərcih edərək, LineageOS-u təkmilləşdirməyimizə kömək edin</string>
++    <string name="anonymous_statistics_title">Techzaster UI statistikaları</string>
++    <string name="anonymous_statistics_summary">Anonim statistika göndərməni tərcih edərək, Techzaster UI-u təkmilləşdirməyimizə kömək edin</string>
+     <string name="anonymous_statistics_warning_title">Haqqında</string>
+-    <string name="anonymous_statistics_warning">LineageOS Statistikalarına daxil olmaq, cihazlar arasındakı unikal quraşdırmaların
+-        izlənilməsi üçün LineageOS-un tərtibatçılarına şəxsi olmayan verilənlərin göndərilməsinə icazə verəcək. Göndərilən məlumatlar, gizliliyiniz və ya şəxsi verilənləriniz
++    <string name="anonymous_statistics_warning">Techzaster UI Statistikalarına daxil olmaq, cihazlar arasındakı unikal quraşdırmaların
++        izlənilməsi üçün Techzaster UI-un tərtibatçılarına şəxsi olmayan verilənlərin göndərilməsinə icazə verəcək. Göndərilən məlumatlar, gizliliyiniz və ya şəxsi verilənləriniz
+         üçün təhlükəli olmayan unikal bir identifikator ehtiva edir. Verilənlər hər önyükləmə vaxtı göndərilir.\n\nGöndərilən verilənlərə nümunə olaraq Verilənlərə Önbaxış-a toxunun.</string>
+     <string name="enable_reporting_title">Hesabat göndərməni fəallaşdır</string>
+     <string name="preview_data_title">Verilənlərə önbaxış</string>
+diff --git a/res/values-az/strings.xml b/res/values-az/strings.xml
+index 616cb97..45bb2e3 100644
+--- a/res/values-az/strings.xml
++++ b/res/values-az/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Tənzimləmələri</string>
++    <string name="cmparts_title">Techzaster UI Tənzimləmələri</string>
+     <string name="loading">Yüklənir\u2026</string>
+     <string name="dlg_ok">Oldu</string>
+     <string name="cancel">İmtina</string>
+@@ -420,11 +420,11 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Bütün töhvə verənlər:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Bütün daxil edilənlər:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Son yeniləmə:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS statistikaları</string>
+-    <string name="anonymous_statistics_summary">Anonim statistika göndərməni tərcih edərək, LineageOS-u təkmilləşdirməyimizə kömək edin</string>
++    <string name="anonymous_statistics_title">Techzaster UI statistikaları</string>
++    <string name="anonymous_statistics_summary">Anonim statistika göndərməni tərcih edərək, Techzaster UI-u təkmilləşdirməyimizə kömək edin</string>
+     <string name="anonymous_statistics_warning_title">Haqqında</string>
+-    <string name="anonymous_statistics_warning">LineageOS Statistikalarına daxil olmaq, cihazlar arasındakı unikal quraşdırmaların
+-        izlənilməsi üçün LineageOS-un tərtibatçılarına şəxsi olmayan verilənlərin göndərilməsinə icazə verəcək. Göndərilən məlumatlar, gizliliyiniz və ya şəxsi verilənləriniz
++    <string name="anonymous_statistics_warning">Techzaster UI Statistikalarına daxil olmaq, cihazlar arasındakı unikal quraşdırmaların
++        izlənilməsi üçün Techzaster UI-un tərtibatçılarına şəxsi olmayan verilənlərin göndərilməsinə icazə verəcək. Göndərilən məlumatlar, gizliliyiniz və ya şəxsi verilənləriniz
+         üçün təhlükəli olmayan unikal bir identifikator ehtiva edir. Verilənlər hər önyükləmə vaxtı göndərilir.\n\nGöndərilən verilənlərə nümunə olaraq Verilənlərə Önbaxış-a toxunun.</string>
+     <string name="enable_reporting_title">Hesabat göndərməni fəallaşdır</string>
+     <string name="preview_data_title">Verilənlərə önbaxış</string>
+diff --git a/res/values-be-rBY/strings.xml b/res/values-be-rBY/strings.xml
+index 7cdf5a5..63327ca 100644
+--- a/res/values-be-rBY/strings.xml
++++ b/res/values-be-rBY/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -17,7 +17,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Налады LineageOS</string>
++    <string name="cmparts_title">Налады Techzaster UI</string>
+     <string name="loading">Ладаваньне\u2026</string>
+     <string name="dlg_ok">Добра</string>
+     <string name="cancel">Скасаваць</string>
+diff --git a/res/values-be/strings.xml b/res/values-be/strings.xml
+index b0416cb..f9925bc 100644
+--- a/res/values-be/strings.xml
++++ b/res/values-be/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Налады LineageOS</string>
++    <string name="cmparts_title">Налады Techzaster UI</string>
+     <string name="loading">Ладаваньне\u2026</string>
+     <string name="dlg_ok">Добра</string>
+     <string name="cancel">Скасаваць</string>
+diff --git a/res/values-bg/strings.xml b/res/values-bg/strings.xml
+index 3ffb25f..9b9ddd0 100644
+--- a/res/values-bg/strings.xml
++++ b/res/values-bg/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Настройки LineageOS</string>
++    <string name="cmparts_title">Настройки Techzaster UI</string>
+     <string name="loading">Зареждане\u2026</string>
+     <string name="dlg_ok">ОK</string>
+     <string name="cancel">Отмени</string>
+@@ -421,9 +421,9 @@
+                  <b>Брой промени:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Последна актуализация:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+     <string name="anonymous_statistics_title">Статистики</string>
+-    <string name="anonymous_statistics_summary">Помогнете да направим LineageOS по-добър, като разрешите да събира анонимни статистически данни</string>
++    <string name="anonymous_statistics_summary">Помогнете да направим Techzaster UI по-добър, като разрешите да събира анонимни статистически данни</string>
+     <string name="anonymous_statistics_warning_title">За проложението</string>
+-    <string name="anonymous_statistics_warning">Ще позволи на LineageOS Statistics да изпраща не лична информация  на разработчиците от LineageOS, за проследяване на инсталациите в устройството. Предоставената информация включва уникален идентификатор, който не застрашава вашата поверителност или лични данни. Данните се подават по време на всяко зареждане.\n\nПример за данните, които са подадени.</string>
++    <string name="anonymous_statistics_warning">Ще позволи на Techzaster UI Statistics да изпраща не лична информация  на разработчиците от Techzaster UI, за проследяване на инсталациите в устройството. Предоставената информация включва уникален идентификатор, който не застрашава вашата поверителност или лични данни. Данните се подават по време на всяко зареждане.\n\nПример за данните, които са подадени.</string>
+     <string name="enable_reporting_title">Разреши отчитане</string>
+     <string name="preview_data_title">Визуализиране на данните</string>
+     <string name="view_stats_title">Преглед на статистиките</string>
+diff --git a/res/values-ca/strings.xml b/res/values-ca/strings.xml
+index dcf586c..3896458 100644
+--- a/res/values-ca/strings.xml
++++ b/res/values-ca/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Configuració de LineageOS</string>
++    <string name="cmparts_title">Configuració de Techzaster UI</string>
+     <string name="loading">S\'està carregant\u2026</string>
+     <string name="dlg_ok">D\'ACORD</string>
+     <string name="cancel">Cancel·la</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Total de contribuïdors:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Total de publicacions:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Darrera actualització:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Estadístiques de LineageOS</string>
+-    <string name="anonymous_statistics_summary">Ajuda a fer millor LineageOS optant a transmetre estadístiques anònimes</string>
++    <string name="anonymous_statistics_title">Estadístiques de Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Ajuda a fer millor Techzaster UI optant a transmetre estadístiques anònimes</string>
+     <string name="anonymous_statistics_warning_title">Quant a</string>
+-    <string name="anonymous_statistics_warning">Optant a les estadístiques de LineageOS permetràs que dades no-personals siguin transmeses als desenvolupadors de LineageOS per rastrejar les instal·lacions individuals a través dels dispositius. La informació transmesa inclou un identificador únic, que no compromet la privacitat o les dades personals. Les dades son transmeses durant cada arrancada.\n\nPer un exemple de les dades transmeses, pica a vista prèvia de Dades.</string>
++    <string name="anonymous_statistics_warning">Optant a les estadístiques de Techzaster UI permetràs que dades no-personals siguin transmeses als desenvolupadors de Techzaster UI per rastrejar les instal·lacions individuals a través dels dispositius. La informació transmesa inclou un identificador únic, que no compromet la privacitat o les dades personals. Les dades son transmeses durant cada arrancada.\n\nPer un exemple de les dades transmeses, pica a vista prèvia de Dades.</string>
+     <string name="enable_reporting_title">Activa els informes</string>
+     <string name="preview_data_title">Vista prèvia de Dades</string>
+     <string name="view_stats_title">Veure estadístiques</string>
+diff --git a/res/values-cs/strings.xml b/res/values-cs/strings.xml
+index 38532d2..5d3b65f 100644
+--- a/res/values-cs/strings.xml
++++ b/res/values-cs/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Nastavení LineageOS</string>
++    <string name="cmparts_title">Nastavení Techzaster UI</string>
+     <string name="loading">Načítání\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Zrušit</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Celkem přispěvatelů:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+ <b>Celkem příspěvků:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+ <b>Poslední aktualizace:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS statistika</string>
+-    <string name="anonymous_statistics_summary">Pomozte nám zdokonalit LineageOS zasíláním anonymní statistiky</string>
++    <string name="anonymous_statistics_title">Techzaster UI statistika</string>
++    <string name="anonymous_statistics_summary">Pomozte nám zdokonalit Techzaster UI zasíláním anonymní statistiky</string>
+     <string name="anonymous_statistics_warning_title">O této aplikaci</string>
+-    <string name="anonymous_statistics_warning">Povolením zasílání statistik systému LineageOS umožní odesílat neosobní data vývojářům k zjišťování stavu instalace na různých zařízeních. Odesílaná data obsahují unikátní identifikátor zařízení, který nezpůsobí žádnou kompromitaci soukromí nebo osobních dat. Data jsou odesílána při každém restartu zařízení.\n\nDotykem na „Náhled dat“ se můžete podívat na příklad odesílaných dat.</string>
++    <string name="anonymous_statistics_warning">Povolením zasílání statistik systému Techzaster UI umožní odesílat neosobní data vývojářům k zjišťování stavu instalace na různých zařízeních. Odesílaná data obsahují unikátní identifikátor zařízení, který nezpůsobí žádnou kompromitaci soukromí nebo osobních dat. Data jsou odesílána při každém restartu zařízení.\n\nDotykem na „Náhled dat“ se můžete podívat na příklad odesílaných dat.</string>
+     <string name="enable_reporting_title">Povolit odesílání</string>
+     <string name="preview_data_title">Náhled dat</string>
+     <string name="view_stats_title">Zobrazit statistiky</string>
+diff --git a/res/values-csb-rPL/strings.xml b/res/values-csb-rPL/strings.xml
+index 767d535..d123265 100644
+--- a/res/values-csb-rPL/strings.xml
++++ b/res/values-csb-rPL/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-cy/strings.xml b/res/values-cy/strings.xml
+index af899bd..cf7c386 100644
+--- a/res/values-cy/strings.xml
++++ b/res/values-cy/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Gosodiadau LineageOS</string>
++    <string name="cmparts_title">Gosodiadau Techzaster UI</string>
+     <string name="loading">Yn llwytho\u2026</string>
+     <string name="dlg_ok">Iawn</string>
+     <string name="cancel">Canslo</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Nifer cyfranwyr:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Nifer o gyfraniadau (commits):</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Diweddariad diwethaf:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Ystadegau LineageOS</string>
+-    <string name="anonymous_statistics_summary">Helpu i wella LineageOS gan ganiatáu casglu adroddiadau ystadegau anhysbys</string>
++    <string name="anonymous_statistics_title">Ystadegau Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Helpu i wella Techzaster UI gan ganiatáu casglu adroddiadau ystadegau anhysbys</string>
+     <string name="anonymous_statistics_warning_title">Ynghylch</string>
+-    <string name="anonymous_statistics_warning">Bydd cytuno i rannu Ystadegau LineageOS yn caniatáu data na sydd yn bersonol i gael ei rannu gyda datblygwyr LineageOS er mwyn tracio gosodiadau unigryw ar draws dyfeisiau. Bydd y wybodaeth a rennir yn cynnwys dynodwr unigryw i\'w adnabod heb gyfaddawdu dy breifatrwydd na dy ddata personol. Caiff y data ei rannu pob tro mae\'r system yn dechrau.\n\nI weld enghraifft o\'r data sy\'n cael ei rannu, tapia Rhagolwg Data.</string>
++    <string name="anonymous_statistics_warning">Bydd cytuno i rannu Ystadegau Techzaster UI yn caniatáu data na sydd yn bersonol i gael ei rannu gyda datblygwyr Techzaster UI er mwyn tracio gosodiadau unigryw ar draws dyfeisiau. Bydd y wybodaeth a rennir yn cynnwys dynodwr unigryw i\'w adnabod heb gyfaddawdu dy breifatrwydd na dy ddata personol. Caiff y data ei rannu pob tro mae\'r system yn dechrau.\n\nI weld enghraifft o\'r data sy\'n cael ei rannu, tapia Rhagolwg Data.</string>
+     <string name="enable_reporting_title">Caniatáu adroddiadau</string>
+     <string name="preview_data_title">Rhagolwg o\'r data</string>
+     <string name="view_stats_title">Gweld ystadegau</string>
+diff --git a/res/values-da/strings.xml b/res/values-da/strings.xml
+index b5fdaff..95674ee 100644
+--- a/res/values-da/strings.xml
++++ b/res/values-da/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Indstillinger</string>
++    <string name="cmparts_title">Techzaster UI Indstillinger</string>
+     <string name="loading">Indlæser\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Afbryd</string>
+@@ -412,11 +412,11 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Bidragsydere i alt:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Bidrag i alt:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Seneste opdatering:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS-statistikker</string>
+-    <string name="anonymous_statistics_summary">Hjælp med at gøre LineageOS bedre ved at deltage i rapportering af anonyme statistikker</string>
++    <string name="anonymous_statistics_title">Techzaster UI-statistikker</string>
++    <string name="anonymous_statistics_summary">Hjælp med at gøre Techzaster UI bedre ved at deltage i rapportering af anonyme statistikker</string>
+     <string name="anonymous_statistics_warning_title">Om</string>
+-    <string name="anonymous_statistics_warning">Deltagelse i LineageOS-statistikker vil tillade ikke-personlige data, at blive indsendt til
+-        udviklerne af LineageOS, for at spore unikke installeringer, på tværs af enheder. Den indsendte information inkluderer en unik indikator,
++    <string name="anonymous_statistics_warning">Deltagelse i Techzaster UI-statistikker vil tillade ikke-personlige data, at blive indsendt til
++        udviklerne af Techzaster UI, for at spore unikke installeringer, på tværs af enheder. Den indsendte information inkluderer en unik indikator,
+         som ikke kompromitterer dit privatliv, eller dine personlige data. Dataene indsendes under hver opstart.\n\nTryk på Forhåndsvis Data, for et eksempel på de data, der er indsendes.</string>
+     <string name="enable_reporting_title">Aktivér rapportering</string>
+     <string name="preview_data_title">Få vist data</string>
+diff --git a/res/values-de/strings.xml b/res/values-de/strings.xml
+index 56d6f8d..5382ffe 100644
+--- a/res/values-de/strings.xml
++++ b/res/values-de/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS-Einstellungen</string>
++    <string name="cmparts_title">Techzaster UI-Einstellungen</string>
+     <string name="loading">Wird geladen\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Abbrechen</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Mitwirkende insgesamt:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+ <b>Beiträge insgesamt:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+ <b>Letzte Aktualisierung:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS-Statistiken</string>
+-    <string name="anonymous_statistics_summary">Hilf uns, LineageOS zu verbessern, indem du dem Sammeln anonymer Gerätestatistiken zustimmst.</string>
++    <string name="anonymous_statistics_title">Techzaster UI-Statistiken</string>
++    <string name="anonymous_statistics_summary">Hilf uns, Techzaster UI zu verbessern, indem du dem Sammeln anonymer Gerätestatistiken zustimmst.</string>
+     <string name="anonymous_statistics_warning_title">Über</string>
+-    <string name="anonymous_statistics_warning">Die Aktivierung der LineageOS-Statistiken ermöglicht die Übertragung von nicht-personenbezogenen Daten an die Entwickler von LineageOS. Die bei jedem Neustart des Geräts übermittelten Daten beeinträchtigen nicht die Privatsphäre, da sie keinerlei Rückschlüsse auf den Benutzer zulassen.\n\nFür ein Beispiel der gesendeten Daten bitte auf \"Vorschau\" klicken.</string>
++    <string name="anonymous_statistics_warning">Die Aktivierung der Techzaster UI-Statistiken ermöglicht die Übertragung von nicht-personenbezogenen Daten an die Entwickler von Techzaster UI. Die bei jedem Neustart des Geräts übermittelten Daten beeinträchtigen nicht die Privatsphäre, da sie keinerlei Rückschlüsse auf den Benutzer zulassen.\n\nFür ein Beispiel der gesendeten Daten bitte auf \"Vorschau\" klicken.</string>
+     <string name="enable_reporting_title">Berichte einschalten</string>
+     <string name="preview_data_title">Vorschau</string>
+     <string name="view_stats_title">Statistiken anzeigen</string>
+diff --git a/res/values-el/strings.xml b/res/values-el/strings.xml
+index 89f2f8f..e5d51f0 100644
+--- a/res/values-el/strings.xml
++++ b/res/values-el/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Ρυθμίσεις LineageOS</string>
++    <string name="cmparts_title">Ρυθμίσεις Techzaster UI</string>
+     <string name="loading">Φόρτωση\u2026</string>
+     <string name="dlg_ok">ΟΚ</string>
+     <string name="cancel">Ακύρωση</string>
+@@ -420,11 +420,11 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Σύνολο συνεισφερόντων:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Σύνολο συνεισφορών:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Τελευταία ενημέρωση:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Στατιστικά LineageOS</string>
+-    <string name="anonymous_statistics_summary">Βοηθήστε το LineageOS να γίνει καλύτερο ενεργοποιώντας την αποστολή ανώνυμων στατιστικών στοιχείων</string>
++    <string name="anonymous_statistics_title">Στατιστικά Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Βοηθήστε το Techzaster UI να γίνει καλύτερο ενεργοποιώντας την αποστολή ανώνυμων στατιστικών στοιχείων</string>
+     <string name="anonymous_statistics_warning_title">Σχετικά</string>
+-    <string name="anonymous_statistics_warning">Ενεργοποιώντας τα στατιστικά του LineageOS επιτρέπετε την αποστολή
+-        μη προσωπικών δεδομένων στους προγραμματιστές του LineageOS για παρακολούθηση του αριθμού μοναδικών εγκαταστάσεων
++    <string name="anonymous_statistics_warning">Ενεργοποιώντας τα στατιστικά του Techzaster UI επιτρέπετε την αποστολή
++        μη προσωπικών δεδομένων στους προγραμματιστές του Techzaster UI για παρακολούθηση του αριθμού μοναδικών εγκαταστάσεων
+         σε όλες τις συσκευές. Οι πληροφορίες που αποστέλλονται συμπεριλαμβάνουν ένα μοναδικό αναγνωριστικό, το οποίο δεν θέτει
+         σε κίνδυνο την ασφάλεια σας ή τα προσωπικά δεδομένα. Τα δεδομένα αποστέλλονται σε κάθε εκκίνηση.\n\nΓια ένα παράδειγμα
+         των δεδομένων που αποστέλλονται, πατήστε στην Προεπισκόπηση δεδομένων.</string>
+diff --git a/res/values-en-rAU/strings.xml b/res/values-en-rAU/strings.xml
+index 7c44118..19819e3 100644
+--- a/res/values-en-rAU/strings.xml
++++ b/res/values-en-rAU/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Settings</string>
++    <string name="cmparts_title">Techzaster UI Settings</string>
+     <string name="loading">Loading\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Cancel</string>
+@@ -420,11 +420,11 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Total contributors:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Total commits:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Last update:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS statistics</string>
+-    <string name="anonymous_statistics_summary">Help make LineageOS better by opting into anonymous statistics reporting</string>
++    <string name="anonymous_statistics_title">Techzaster UI statistics</string>
++    <string name="anonymous_statistics_summary">Help make Techzaster UI better by opting into anonymous statistics reporting</string>
+     <string name="anonymous_statistics_warning_title">About</string>
+-    <string name="anonymous_statistics_warning">Opting into LineageOS Statistics will allow non-personal data to be submitted to the
+-        developers of LineageOS to track unique installations across devices. The information submitted includes an unique identifier,
++    <string name="anonymous_statistics_warning">Opting into Techzaster UI Statistics will allow non-personal data to be submitted to the
++        developers of Techzaster UI to track unique installations across devices. The information submitted includes an unique identifier,
+         which does not compromise your privacy or personal data. The data is submitted during each boot.\n\nFor an example of the data that is submitted, tap on Preview Data.</string>
+     <string name="enable_reporting_title">Enable reporting</string>
+     <string name="preview_data_title">Preview data</string>
+diff --git a/res/values-en-rCA/strings.xml b/res/values-en-rCA/strings.xml
+index 7abc962..8fa58a3 100644
+--- a/res/values-en-rCA/strings.xml
++++ b/res/values-en-rCA/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Settings</string>
++    <string name="cmparts_title">Techzaster UI Settings</string>
+     <string name="loading">Loading\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Cancel</string>
+@@ -420,11 +420,11 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Total contributors:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Total commits:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Last update:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS statistics</string>
+-    <string name="anonymous_statistics_summary">Help make LineageOS better by opting into anonymous statistics reporting</string>
++    <string name="anonymous_statistics_title">Techzaster UI statistics</string>
++    <string name="anonymous_statistics_summary">Help make Techzaster UI better by opting into anonymous statistics reporting</string>
+     <string name="anonymous_statistics_warning_title">About</string>
+-    <string name="anonymous_statistics_warning">Opting into LineageOS Statistics will allow non-personal data to be submitted to the
+-        developers of LineageOS to track unique installations across devices. The information submitted includes an unique identifier,
++    <string name="anonymous_statistics_warning">Opting into Techzaster UI Statistics will allow non-personal data to be submitted to the
++        developers of Techzaster UI to track unique installations across devices. The information submitted includes an unique identifier,
+         which does not compromise your privacy or personal data. The data is submitted during each boot.\n\nFor an example of the data that is submitted, tap on Preview Data.</string>
+     <string name="enable_reporting_title">Enable reporting</string>
+     <string name="preview_data_title">Preview data</string>
+diff --git a/res/values-en-rGB/strings.xml b/res/values-en-rGB/strings.xml
+index b732b3b..b8ba936 100644
+--- a/res/values-en-rGB/strings.xml
++++ b/res/values-en-rGB/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Settings</string>
++    <string name="cmparts_title">Techzaster UI Settings</string>
+     <string name="loading">Loading\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Cancel</string>
+@@ -420,11 +420,11 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Total contributors:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Total commits:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Last update:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS statistics</string>
+-    <string name="anonymous_statistics_summary">Help make LineageOS better by opting into anonymous statistics reporting</string>
++    <string name="anonymous_statistics_title">Techzaster UI statistics</string>
++    <string name="anonymous_statistics_summary">Help make Techzaster UI better by opting into anonymous statistics reporting</string>
+     <string name="anonymous_statistics_warning_title">About</string>
+-    <string name="anonymous_statistics_warning">Opting into LineageOS Statistics will allow non-personal data to be submitted to the
+-        developers of LineageOS to track unique installations across devices. The information submitted includes an unique identifier,
++    <string name="anonymous_statistics_warning">Opting into Techzaster UI Statistics will allow non-personal data to be submitted to the
++        developers of Techzaster UI to track unique installations across devices. The information submitted includes an unique identifier,
+         which does not compromise your privacy or personal data. The data is submitted during each boot.\n\nFor an example of the data that is submitted, tap on Preview Data.</string>
+     <string name="enable_reporting_title">Enable reporting</string>
+     <string name="preview_data_title">Preview data</string>
+diff --git a/res/values-en-rIN/strings.xml b/res/values-en-rIN/strings.xml
+index 26e047d..2e77c0f 100644
+--- a/res/values-en-rIN/strings.xml
++++ b/res/values-en-rIN/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Settings</string>
++    <string name="cmparts_title">Techzaster UI Settings</string>
+     <string name="loading">Loading\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Cancel</string>
+@@ -420,11 +420,11 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Total contributors:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Total commits:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Last update:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS statistics</string>
+-    <string name="anonymous_statistics_summary">Help make LineageOS better by opting into anonymous statistics reporting</string>
++    <string name="anonymous_statistics_title">Techzaster UI statistics</string>
++    <string name="anonymous_statistics_summary">Help make Techzaster UI better by opting into anonymous statistics reporting</string>
+     <string name="anonymous_statistics_warning_title">About</string>
+-    <string name="anonymous_statistics_warning">Opting into LineageOS Statistics will allow non-personal data to be submitted to the
+-        developers of LineageOS to track unique installations across devices. The information submitted includes an unique identifier,
++    <string name="anonymous_statistics_warning">Opting into Techzaster UI Statistics will allow non-personal data to be submitted to the
++        developers of Techzaster UI to track unique installations across devices. The information submitted includes an unique identifier,
+         which does not compromise your privacy or personal data. The data is submitted during each boot.\n\nFor an example of the data that is submitted, tap on Preview Data.</string>
+     <string name="enable_reporting_title">Enable reporting</string>
+     <string name="preview_data_title">Preview data</string>
+diff --git a/res/values-es-rUS/strings.xml b/res/values-es-rUS/strings.xml
+index 938f2da..ebb465a 100644
+--- a/res/values-es-rUS/strings.xml
++++ b/res/values-es-rUS/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Ajustes de LineageOS</string>
++    <string name="cmparts_title">Ajustes de Techzaster UI</string>
+     <string name="loading">Cargando\u2026</string>
+     <string name="dlg_ok">Aceptar</string>
+     <string name="cancel">Cancelar</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Colaboradores totales:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Contribuciones totales:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Última actualización:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Estadísticas de LineageOS</string>
+-    <string name="anonymous_statistics_summary">Ayuda a mejorar LineageOS mediante el envío anónimo de estadísticas</string>
++    <string name="anonymous_statistics_title">Estadísticas de Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Ayuda a mejorar Techzaster UI mediante el envío anónimo de estadísticas</string>
+     <string name="anonymous_statistics_warning_title">Acerca de</string>
+-    <string name="anonymous_statistics_warning">Al permitir la recopilación y el envío de estadísticas de LineageOS, autorizas el envío de información de carácter no personal a los desarrolladores de LineageOS para hacer un seguimiento de las instalaciones que realices en los dispositivos. La información enviada incluye un identificador único que no compromete tu privacidad ni tu información personal. Esta información es enviada durante el arranque.\n\nPara ver un ejemplo de la información enviada, pulsa en Previsualizar datos.</string>
++    <string name="anonymous_statistics_warning">Al permitir la recopilación y el envío de estadísticas de Techzaster UI, autorizas el envío de información de carácter no personal a los desarrolladores de Techzaster UI para hacer un seguimiento de las instalaciones que realices en los dispositivos. La información enviada incluye un identificador único que no compromete tu privacidad ni tu información personal. Esta información es enviada durante el arranque.\n\nPara ver un ejemplo de la información enviada, pulsa en Previsualizar datos.</string>
+     <string name="enable_reporting_title">Activar envío de estadísticas</string>
+     <string name="preview_data_title">Previsualizar datos</string>
+     <string name="view_stats_title">Ver estadísticas</string>
+diff --git a/res/values-es/strings.xml b/res/values-es/strings.xml
+index 53ce127..e2c6b2f 100644
+--- a/res/values-es/strings.xml
++++ b/res/values-es/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Configuración de LineageOS</string>
++    <string name="cmparts_title">Configuración de Techzaster UI</string>
+     <string name="loading">Cargando\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Cancelar</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Contribuyentes totales:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Contribuciones totales:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Última actualización:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Estadísticas LineageOS</string>
+-    <string name="anonymous_statistics_summary">Ayuda a mejorar LineageOS mediante el envío anónimo de estadísticas</string>
++    <string name="anonymous_statistics_title">Estadísticas Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Ayuda a mejorar Techzaster UI mediante el envío anónimo de estadísticas</string>
+     <string name="anonymous_statistics_warning_title">Acerca de</string>
+-    <string name="anonymous_statistics_warning">Al permitir la recopilación y el envío de estadísticas de LineageOS, autorizas el envío de información de carácter no personal a los desarrolladores de LineageOS para hacer un seguimiento de las instalaciones que realices en los dispositivos. La información enviada incluye un identificador único que no compromete tu privacidad ni tu información personal. Esta información es enviada durante el arranque.\n\nPara ver un ejemplo de la información enviada, pulsa en Previsualizar datos.</string>
++    <string name="anonymous_statistics_warning">Al permitir la recopilación y el envío de estadísticas de Techzaster UI, autorizas el envío de información de carácter no personal a los desarrolladores de Techzaster UI para hacer un seguimiento de las instalaciones que realices en los dispositivos. La información enviada incluye un identificador único que no compromete tu privacidad ni tu información personal. Esta información es enviada durante el arranque.\n\nPara ver un ejemplo de la información enviada, pulsa en Previsualizar datos.</string>
+     <string name="enable_reporting_title">Activar envío de estadísticas</string>
+     <string name="preview_data_title">Previsualizar datos</string>
+     <string name="view_stats_title">Ver estadísticas</string>
+diff --git a/res/values-et-rEE/strings.xml b/res/values-et-rEE/strings.xml
+index a8eb4ad..6e5bade 100644
+--- a/res/values-et-rEE/strings.xml
++++ b/res/values-et-rEE/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-et/strings.xml b/res/values-et/strings.xml
+index 4f9f18f..3792233 100644
+--- a/res/values-et/strings.xml
++++ b/res/values-et/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-eu-rES/strings.xml b/res/values-eu-rES/strings.xml
+index f92f31f..e048c5b 100644
+--- a/res/values-eu-rES/strings.xml
++++ b/res/values-eu-rES/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -17,7 +17,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS ezarpenak</string>
++    <string name="cmparts_title">Techzaster UI ezarpenak</string>
+     <string name="loading">Kargatzen\u2026</string>
+     <string name="dlg_ok">Ados</string>
+     <string name="cancel">Utzi</string>
+@@ -421,10 +421,10 @@
+     <string name="contributions_info_msg">&lt;b&gt;Parte-hartzaileak guztira:&lt;/b&gt; &lt;xliff:g id="total_contributors"&gt;%1$s&lt;/xliff:g&gt;&lt;br/&gt;&lt;br/&gt;
+                  &lt;b&gt;Parte-hartzeak guztira:&lt;/b&gt; &lt;xliff:g id="total_commits"&gt;%2$s&lt;/xliff:g&gt;&lt;br/&gt;&lt;br/&gt;
+                  &lt;b&gt;Azken eguneratzea:&lt;/b&gt; &lt;xliff:g id="date"&gt;%3$s&lt;/xliff:g&gt;</string>
+-    <string name="anonymous_statistics_title">LineageOS estatistikak</string>
+-    <string name="anonymous_statistics_summary">LineageOS hobetzen lagundu estatistika anonimoak bidaliz</string>
++    <string name="anonymous_statistics_title">Techzaster UI estatistikak</string>
++    <string name="anonymous_statistics_summary">Techzaster UI hobetzen lagundu estatistika anonimoak bidaliz</string>
+     <string name="anonymous_statistics_warning_title">Honi buruz</string>
+-    <string name="anonymous_statistics_warning">LineageOS-en estatistiken bilketa eta bidaltzea baimenduz, informazio ez pertsonala LineageOS garatzaileei bidaltzea baimentzen duzu, gailuetan burutzen diren instalazioen jarraipenerako. Bidalitako informazioak identifikadore esklusibo eta anonimo bat darama.
++    <string name="anonymous_statistics_warning">Techzaster UI-en estatistiken bilketa eta bidaltzea baimenduz, informazio ez pertsonala Techzaster UI garatzaileei bidaltzea baimentzen duzu, gailuetan burutzen diren instalazioen jarraipenerako. Bidalitako informazioak identifikadore esklusibo eta anonimo bat darama.
+ Informazio hau gailuaren abio bakoitzean bidaltzen da.\n\nBidalitako informazioaren adibide bat ikusteko, sakatu Aurreikusi datuak.</string>
+     <string name="enable_reporting_title">Gaitu txosten bidalketa</string>
+     <string name="preview_data_title">Aurreikusi datuak</string>
+diff --git a/res/values-eu/strings.xml b/res/values-eu/strings.xml
+index 20386f0..8e22f91 100644
+--- a/res/values-eu/strings.xml
++++ b/res/values-eu/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS ezarpenak</string>
++    <string name="cmparts_title">Techzaster UI ezarpenak</string>
+     <string name="loading">Kargatzen\u2026</string>
+     <string name="dlg_ok">Ados</string>
+     <string name="cancel">Utzi</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Parte-hartzaileak guztira:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Parte-hartzeak guztira:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Azken eguneratzea:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS estatistikak</string>
+-    <string name="anonymous_statistics_summary">LineageOS hobetzen lagundu estatistika anonimoak bidaliz</string>
++    <string name="anonymous_statistics_title">Techzaster UI estatistikak</string>
++    <string name="anonymous_statistics_summary">Techzaster UI hobetzen lagundu estatistika anonimoak bidaliz</string>
+     <string name="anonymous_statistics_warning_title">Honi buruz</string>
+-    <string name="anonymous_statistics_warning">LineageOS-en estatistiken bilketa eta bidaltzea baimenduz, informazio ez pertsonala LineageOS garatzaileei bidaltzea baimentzen duzu, gailuetan burutzen diren instalazioen jarraipenerako. Bidalitako informazioak identifikadore esklusibo eta anonimo bat darama.
++    <string name="anonymous_statistics_warning">Techzaster UI-en estatistiken bilketa eta bidaltzea baimenduz, informazio ez pertsonala Techzaster UI garatzaileei bidaltzea baimentzen duzu, gailuetan burutzen diren instalazioen jarraipenerako. Bidalitako informazioak identifikadore esklusibo eta anonimo bat darama.
+ Informazio hau gailuaren abio bakoitzean bidaltzen da.\n\nBidalitako informazioaren adibide bat ikusteko, sakatu Aurreikusi datuak.</string>
+     <string name="enable_reporting_title">Gaitu txosten bidalketa</string>
+     <string name="preview_data_title">Aurreikusi datuak</string>
+diff --git a/res/values-fi/strings.xml b/res/values-fi/strings.xml
+index 0cb675c..eac172c 100644
+--- a/res/values-fi/strings.xml
++++ b/res/values-fi/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Asetukset</string>
++    <string name="cmparts_title">Techzaster UI Asetukset</string>
+     <string name="loading">Ladataan\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Peruuta</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Kehittäjiä yhteensä:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Muutoksia yhteensä:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Päivitetty:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS-tilastot</string>
+-    <string name="anonymous_statistics_summary">Auta tekemään LineageOSista parempi tarjoamalla anonyymejä tilastoraportteja</string>
++    <string name="anonymous_statistics_title">Techzaster UI-tilastot</string>
++    <string name="anonymous_statistics_summary">Auta tekemään Techzaster UIista parempi tarjoamalla anonyymejä tilastoraportteja</string>
+     <string name="anonymous_statistics_warning_title">Tietoja</string>
+-    <string name="anonymous_statistics_warning">LineageOS-tilastojen käyttöönotto mahdollistaa anonyymien tietojen lähettämisen LineageOSin kehittäjille, jotta laitteiden järjestelmäasennuksia voidaan seurata. Tiedot sisältävät yksilöllisen tunnisteen, joka ei vaaranna henkilökohtaisia tietojasi. Tietoja lähetetään jokaisella uudelleenkäynnistyskerralla.\n\nValitse Esikatsele tietoja nähdäksesi, millaisia tietoja laitteestasi lähetetään.</string>
++    <string name="anonymous_statistics_warning">Techzaster UI-tilastojen käyttöönotto mahdollistaa anonyymien tietojen lähettämisen Techzaster UIin kehittäjille, jotta laitteiden järjestelmäasennuksia voidaan seurata. Tiedot sisältävät yksilöllisen tunnisteen, joka ei vaaranna henkilökohtaisia tietojasi. Tietoja lähetetään jokaisella uudelleenkäynnistyskerralla.\n\nValitse Esikatsele tietoja nähdäksesi, millaisia tietoja laitteestasi lähetetään.</string>
+     <string name="enable_reporting_title">Ota raportointi käyttöön</string>
+     <string name="preview_data_title">Esikatsele tietoja</string>
+     <string name="view_stats_title">Näytä tilastot</string>
+diff --git a/res/values-fil-rPH/strings.xml b/res/values-fil-rPH/strings.xml
+index 767d535..d123265 100644
+--- a/res/values-fil-rPH/strings.xml
++++ b/res/values-fil-rPH/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-fr/strings.xml b/res/values-fr/strings.xml
+index ce57f2c..0a7d9da 100644
+--- a/res/values-fr/strings.xml
++++ b/res/values-fr/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Paramètres de LineageOS</string>
++    <string name="cmparts_title">Paramètres de Techzaster UI</string>
+     <string name="loading">Chargement\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Annuler</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Nombre de contributeurs :</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Nombre de contributions :</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Dernière mise à jour :</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Statistiques LineageOS</string>
+-    <string name="anonymous_statistics_summary">Contribuez à rendre LineageOS meilleure en envoyant des rapports de statistiques anonymes</string>
++    <string name="anonymous_statistics_title">Statistiques Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Contribuez à rendre Techzaster UI meilleure en envoyant des rapports de statistiques anonymes</string>
+     <string name="anonymous_statistics_warning_title">À propos</string>
+-    <string name="anonymous_statistics_warning">Adhérer à LineageOS Statistics autorisera l\'envoi de données non-personnelles aux développeurs de LineageOS, dans le but de tracer les installations uniques par appareils. Les informations transmises contiennent un identifiant unique de l\'appareil, qui ne compromet en aucune manière votre vie privée ou vos données personnelles. Les données sont envoyées à chaque démarrage du système.\n\nPour visualiser un exemple de données pouvant être envoyées, appuyez sur Prévisualiser les données.</string>
++    <string name="anonymous_statistics_warning">Adhérer à Techzaster UI Statistics autorisera l\'envoi de données non-personnelles aux développeurs de Techzaster UI, dans le but de tracer les installations uniques par appareils. Les informations transmises contiennent un identifiant unique de l\'appareil, qui ne compromet en aucune manière votre vie privée ou vos données personnelles. Les données sont envoyées à chaque démarrage du système.\n\nPour visualiser un exemple de données pouvant être envoyées, appuyez sur Prévisualiser les données.</string>
+     <string name="enable_reporting_title">Activer les rapports</string>
+     <string name="preview_data_title">Aperçu des données</string>
+     <string name="view_stats_title">Afficher les statistiques</string>
+diff --git a/res/values-frp-rIT/strings.xml b/res/values-frp-rIT/strings.xml
+index 767d535..d123265 100644
+--- a/res/values-frp-rIT/strings.xml
++++ b/res/values-frp-rIT/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-fy-rNL/strings.xml b/res/values-fy-rNL/strings.xml
+index b48c0ba..ec31105 100644
+--- a/res/values-fy-rNL/strings.xml
++++ b/res/values-fy-rNL/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS-ynstellingen</string>
++    <string name="cmparts_title">Techzaster UI-ynstellingen</string>
+     <string name="loading">Lade\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Annulearje</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Oantal meiwurkers:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Oantal bydragen:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Lêste fernijing:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS-statistiken</string>
+-    <string name="anonymous_statistics_summary">Help LineageOS te ferbetterjen troch anonime statistiken te ferstjoeren</string>
++    <string name="anonymous_statistics_title">Techzaster UI-statistiken</string>
++    <string name="anonymous_statistics_summary">Help Techzaster UI te ferbetterjen troch anonime statistiken te ferstjoeren</string>
+     <string name="anonymous_statistics_warning_title">Oer</string>
+-    <string name="anonymous_statistics_warning">Troch statistiken ferstjoere ta te stean wurde wylst it opstarten anonime gegevens nei de ûntwikkelers fan LineageOS ferstjoerd om unike ynstallaasjes folgje te kinnen. Yn de gegevens sit in unyk id-nûmer ferwurke, dat jo privacy net skeint.\n\nOm in foarbyld te sjen, tikke jo op ‘Foarbyld fan gegevens’.</string>
++    <string name="anonymous_statistics_warning">Troch statistiken ferstjoere ta te stean wurde wylst it opstarten anonime gegevens nei de ûntwikkelers fan Techzaster UI ferstjoerd om unike ynstallaasjes folgje te kinnen. Yn de gegevens sit in unyk id-nûmer ferwurke, dat jo privacy net skeint.\n\nOm in foarbyld te sjen, tikke jo op ‘Foarbyld fan gegevens’.</string>
+     <string name="enable_reporting_title">Statistiken ferstjoere</string>
+     <string name="preview_data_title">Foarbyld fan gegevens</string>
+     <string name="view_stats_title">Statistiken toane</string>
+diff --git a/res/values-gd-rGB/strings.xml b/res/values-gd-rGB/strings.xml
+index 767d535..d123265 100644
+--- a/res/values-gd-rGB/strings.xml
++++ b/res/values-gd-rGB/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-gd/strings.xml b/res/values-gd/strings.xml
+index 6c3ae57..73c85cf 100644
+--- a/res/values-gd/strings.xml
++++ b/res/values-gd/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Roghainnean LineageOS</string>
++    <string name="cmparts_title">Roghainnean Techzaster UI</string>
+     <string name="loading">’Ga luchdadh\u2026</string>
+     <string name="dlg_ok">Ceart ma-thà</string>
+     <string name="cancel">Sguir dheth</string>
+@@ -420,11 +420,11 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Luchd-cuideachaidh iomlan:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Commits iomlan:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>An t-ùrachadh mu dheireadh:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Stadastaireachd air LineageOS</string>
+-    <string name="anonymous_statistics_summary">Cuidich leinn a thoirt piseach air LineageOS is tu a’ cur aithrisean stadastaireachd gun urra an comas</string>
++    <string name="anonymous_statistics_title">Stadastaireachd air Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Cuidich leinn a thoirt piseach air Techzaster UI is tu a’ cur aithrisean stadastaireachd gun urra an comas</string>
+     <string name="anonymous_statistics_warning_title">Mu dhèidhinn</string>
+-    <string name="anonymous_statistics_warning">Ma cheadaicheas tu gun cruinnich LineageOS stadastaireachd, thèid dàta neo-phearsanta a chur a-null gu
+-        luchd-leasachaidh LineageOS airson stàlaidhean fa leth a thracadh thar uidheaman. Gabhaidh am fiosrachadh a thèid a chur a-null a-steach aithnichear àraidh
++    <string name="anonymous_statistics_warning">Ma cheadaicheas tu gun cruinnich Techzaster UI stadastaireachd, thèid dàta neo-phearsanta a chur a-null gu
++        luchd-leasachaidh Techzaster UI airson stàlaidhean fa leth a thracadh thar uidheaman. Gabhaidh am fiosrachadh a thèid a chur a-null a-steach aithnichear àraidh
+         nach bris a-steach air do phrìobhaideachd no dàta phearsanta. Thèid an dàta a chur a-null gach turas a thèid an t-uidheam a bhùtadh.\n\nAirson ball-eisimpleir dhen dàta a thèid a chur a-null, thòir gnogag air “Ro-sheall an dàta”.</string>
+     <string name="enable_reporting_title">Cuir na h-aithrisean an comas</string>
+     <string name="preview_data_title">Ro-sheall an dàta</string>
+diff --git a/res/values-gl-rES/strings.xml b/res/values-gl-rES/strings.xml
+index 3819e32..a365090 100644
+--- a/res/values-gl-rES/strings.xml
++++ b/res/values-gl-rES/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -17,7 +17,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Axustes de LineageOS</string>
++    <string name="cmparts_title">Axustes de Techzaster UI</string>
+     <string name="loading">Cargando\u2026</string>
+     <string name="dlg_ok">ACEPTAR</string>
+     <string name="cancel">Cancelar</string>
+@@ -421,10 +421,10 @@
+     <string name="contributions_info_msg">&lt;b&gt;Colaboradores totais:&lt;/b&gt; &lt;xliff:g id="total_contributors"&gt;%1$s&lt;/xliff:g&gt;&lt;br/&gt;&lt;br/&gt;
+                  &lt;b&gt;Envíos totais:&lt;/b&gt; &lt;xliff:g id="total_commits"&gt;%2$s&lt;/xliff:g&gt;&lt;br/&gt;&lt;br/&gt;
+                  &lt;b&gt;Última actualización:&lt;/b&gt; &lt;xliff:g id="date"&gt;%3$s&lt;/xliff:g&gt;</string>
+-    <string name="anonymous_statistics_title">LineageOS estadisticas</string>
+-    <string name="anonymous_statistics_summary">Axude a mellorar LineageOS enviando informes de estatísiticas anónimas</string>
++    <string name="anonymous_statistics_title">Techzaster UI estadisticas</string>
++    <string name="anonymous_statistics_summary">Axude a mellorar Techzaster UI enviando informes de estatísiticas anónimas</string>
+     <string name="anonymous_statistics_warning_title">Sobre</string>
+-    <string name="anonymous_statistics_warning">Optar polo envío de estatísticas LineageOS permitirá que se transmitan datos non personais aos desenvolvedores de LineageOS para rastrear intalacións únicas através dos dispositivos. Os datos transmitidos teñen un identificador único, que non compromete a súa privacidade ou datos persoais. Os datos serán enviados cada vez que se inicie.\n\nPara ver un exemplo dos datos van ser enviados, toque en Previsualizar datos.</string>
++    <string name="anonymous_statistics_warning">Optar polo envío de estatísticas Techzaster UI permitirá que se transmitan datos non personais aos desenvolvedores de Techzaster UI para rastrear intalacións únicas através dos dispositivos. Os datos transmitidos teñen un identificador único, que non compromete a súa privacidade ou datos persoais. Os datos serán enviados cada vez que se inicie.\n\nPara ver un exemplo dos datos van ser enviados, toque en Previsualizar datos.</string>
+     <string name="enable_reporting_title">Activar envío de estatísticas</string>
+     <string name="preview_data_title">Previsualizar datos</string>
+     <string name="view_stats_title">Ver as estatísticas</string>
+diff --git a/res/values-gl/strings.xml b/res/values-gl/strings.xml
+index bb3f498..fbc4c38 100644
+--- a/res/values-gl/strings.xml
++++ b/res/values-gl/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Axustes de LineageOS</string>
++    <string name="cmparts_title">Axustes de Techzaster UI</string>
+     <string name="loading">Cargando\u2026</string>
+     <string name="dlg_ok">ACEPTAR</string>
+     <string name="cancel">Cancelar</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Colaboradores totais:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Envíos totais:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Última actualización:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS estadisticas</string>
+-    <string name="anonymous_statistics_summary">Axude a mellorar LineageOS enviando informes de estatísiticas anónimas</string>
++    <string name="anonymous_statistics_title">Techzaster UI estadisticas</string>
++    <string name="anonymous_statistics_summary">Axude a mellorar Techzaster UI enviando informes de estatísiticas anónimas</string>
+     <string name="anonymous_statistics_warning_title">Sobre</string>
+-    <string name="anonymous_statistics_warning">Optar polo envío de estatísticas LineageOS permitirá que se transmitan datos non personais aos desenvolvedores de LineageOS para rastrear intalacións únicas através dos dispositivos. Os datos transmitidos teñen un identificador único, que non compromete a súa privacidade ou datos persoais. Os datos serán enviados cada vez que se inicie.\n\nPara ver un exemplo dos datos van ser enviados, toque en Previsualizar datos.</string>
++    <string name="anonymous_statistics_warning">Optar polo envío de estatísticas Techzaster UI permitirá que se transmitan datos non personais aos desenvolvedores de Techzaster UI para rastrear intalacións únicas através dos dispositivos. Os datos transmitidos teñen un identificador único, que non compromete a súa privacidade ou datos persoais. Os datos serán enviados cada vez que se inicie.\n\nPara ver un exemplo dos datos van ser enviados, toque en Previsualizar datos.</string>
+     <string name="enable_reporting_title">Activar envío de estatísticas</string>
+     <string name="preview_data_title">Previsualizar datos</string>
+     <string name="view_stats_title">Ver as estatísticas</string>
+diff --git a/res/values-hr/strings.xml b/res/values-hr/strings.xml
+index 440d2bf..e74b22f 100644
+--- a/res/values-hr/strings.xml
++++ b/res/values-hr/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Postavke</string>
++    <string name="cmparts_title">Techzaster UI Postavke</string>
+     <string name="loading">Učitavanje\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Odustani</string>
+@@ -402,10 +402,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Svi suradnici:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+ <b>Ukupno obveza:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+ <b>Zadnje ažuriranje:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS statistika</string>
+-    <string name="anonymous_statistics_summary">Pomozite nam poboljšati LineageOS slanjem anonimnih statističkih izvješća</string>
++    <string name="anonymous_statistics_title">Techzaster UI statistika</string>
++    <string name="anonymous_statistics_summary">Pomozite nam poboljšati Techzaster UI slanjem anonimnih statističkih izvješća</string>
+     <string name="anonymous_statistics_warning_title">O</string>
+-    <string name="anonymous_statistics_warning">Omogućavanjem slanja LineageOS statistike dozvolit će se da se neosobni podaci dostave razvojnom timu LineageOS-a kako bi se pratio broj pojedinačnih instalacija na različite uređaje. Informacije koje se šalju sadrže jedinstvenu identifikaciju koja ne kompromitira privatnost ili osobne podatke. Podaci se šalju pri svakom pokretanju uređaja.\n\nZa primjer podataka koji se šalju, dodirnite pregled podataka.</string>
++    <string name="anonymous_statistics_warning">Omogućavanjem slanja Techzaster UI statistike dozvolit će se da se neosobni podaci dostave razvojnom timu Techzaster UI-a kako bi se pratio broj pojedinačnih instalacija na različite uređaje. Informacije koje se šalju sadrže jedinstvenu identifikaciju koja ne kompromitira privatnost ili osobne podatke. Podaci se šalju pri svakom pokretanju uređaja.\n\nZa primjer podataka koji se šalju, dodirnite pregled podataka.</string>
+     <string name="enable_reporting_title">Omogući izvješća</string>
+     <string name="preview_data_title">Pretpregled podataka</string>
+     <string name="view_stats_title">Vidi statistiku</string>
+diff --git a/res/values-hu/strings.xml b/res/values-hu/strings.xml
+index a27af71..0b74c8a 100644
+--- a/res/values-hu/strings.xml
++++ b/res/values-hu/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS beállítások</string>
++    <string name="cmparts_title">Techzaster UI beállítások</string>
+     <string name="loading">Betöltés\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Mégse</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Közreműködő összesen:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Összes változtatás:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Utolsó frissítés:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS statisztika</string>
+-    <string name="anonymous_statistics_summary">Segítsen a LineageOS jobbá tételében, kapcsolja be a névtelen statisztikai adatok gyűjtését</string>
++    <string name="anonymous_statistics_title">Techzaster UI statisztika</string>
++    <string name="anonymous_statistics_summary">Segítsen a Techzaster UI jobbá tételében, kapcsolja be a névtelen statisztikai adatok gyűjtését</string>
+     <string name="anonymous_statistics_warning_title">Névjegy</string>
+-    <string name="anonymous_statistics_warning">A LineageOS statisztika engedélyezése nem terjed ki személyes adatokra, csak egy egyedi azonosítóval azonosítjuk az eszközöket. A beküldött adatok beleértve az egyedi azonosítót, nem veszélyeztetik az adatvédelmi vagy személyes adatokat. A statisztika minden rendszerindításkor elküldésre kerül.\n\nAz elküldött adatok menüpont alatt tekintheti meg a statisztikai adatokat.</string>
++    <string name="anonymous_statistics_warning">A Techzaster UI statisztika engedélyezése nem terjed ki személyes adatokra, csak egy egyedi azonosítóval azonosítjuk az eszközöket. A beküldött adatok beleértve az egyedi azonosítót, nem veszélyeztetik az adatvédelmi vagy személyes adatokat. A statisztika minden rendszerindításkor elküldésre kerül.\n\nAz elküldött adatok menüpont alatt tekintheti meg a statisztikai adatokat.</string>
+     <string name="enable_reporting_title">Statisztika engedélyezése</string>
+     <string name="preview_data_title">Elküldött adatok</string>
+     <string name="view_stats_title">Statisztika megtekintése</string>
+diff --git a/res/values-in/strings.xml b/res/values-in/strings.xml
+index 9e8985e..07f96ce 100644
+--- a/res/values-in/strings.xml
++++ b/res/values-in/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Pengaturan LineageOS</string>
++    <string name="cmparts_title">Pengaturan Techzaster UI</string>
+     <string name="loading">Memuat\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Batal</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Total kontributor:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Total tindakan:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Diperbarui:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Statistik LineageOS</string>
+-    <string name="anonymous_statistics_summary">Bantu LineageOS untuk menjadi lebih baik dengan memilih ikut dalam pelaporan statistik anonim</string>
++    <string name="anonymous_statistics_title">Statistik Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Bantu Techzaster UI untuk menjadi lebih baik dengan memilih ikut dalam pelaporan statistik anonim</string>
+     <string name="anonymous_statistics_warning_title">Tentang</string>
+-    <string name="anonymous_statistics_warning">Memilih ikut dalam Statistik LineageOS akan memungkinkan data tidak pribadi dikirimkan kepada para pengembang LineageOS untuk dilacak instalasi unik pada berbagai macam perangkat. Informasi yang dikirimkan berisi pengenal unik, dan tidak membahayakan privasi atau data pribadi Anda. Data dikirim setiap kali perangkat di mulai ulang.\n\nUntuk melihat contoh data yang akan dikirim, ketuk Pratinjau Data.</string>
++    <string name="anonymous_statistics_warning">Memilih ikut dalam Statistik Techzaster UI akan memungkinkan data tidak pribadi dikirimkan kepada para pengembang Techzaster UI untuk dilacak instalasi unik pada berbagai macam perangkat. Informasi yang dikirimkan berisi pengenal unik, dan tidak membahayakan privasi atau data pribadi Anda. Data dikirim setiap kali perangkat di mulai ulang.\n\nUntuk melihat contoh data yang akan dikirim, ketuk Pratinjau Data.</string>
+     <string name="enable_reporting_title">Aktifkan laporan</string>
+     <string name="preview_data_title">Pratinjau data</string>
+     <string name="view_stats_title">Lihat statistik</string>
+diff --git a/res/values-is-rIS/strings.xml b/res/values-is-rIS/strings.xml
+index c43c6fd..fefb1d3 100644
+--- a/res/values-is-rIS/strings.xml
++++ b/res/values-is-rIS/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-is/strings.xml b/res/values-is/strings.xml
+index 9e6c4e9..83f0bb8 100644
+--- a/res/values-is/strings.xml
++++ b/res/values-is/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-it/strings.xml b/res/values-it/strings.xml
+index 51d5d74..34cdd44 100644
+--- a/res/values-it/strings.xml
++++ b/res/values-it/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Impostazioni LineageOS</string>
++    <string name="cmparts_title">Impostazioni Techzaster UI</string>
+     <string name="loading">Caricamento\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Annulla</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Numero contributori:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Numero commit:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Ultimo aggiornamento:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Statistiche LineageOS</string>
+-    <string name="anonymous_statistics_summary">Aiuta a migliorare LineageOS consentendo l\'invio di statistiche anonime</string>
++    <string name="anonymous_statistics_title">Statistiche Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Aiuta a migliorare Techzaster UI consentendo l\'invio di statistiche anonime</string>
+     <string name="anonymous_statistics_warning_title">Info</string>
+-    <string name="anonymous_statistics_warning">Attivando le Statistiche LineageOS consentirai l\'invio di dati non personali agli sviluppatori per contare il numero di installazioni sui dispositivi. Le informazioni inviate includono un\'identificatore unico che non compromette in alcun modo la tua privacy o dati personali.\n\nPer vedere un esempio di dati inviati, tocca Anteprima Dati.</string>
++    <string name="anonymous_statistics_warning">Attivando le Statistiche Techzaster UI consentirai l\'invio di dati non personali agli sviluppatori per contare il numero di installazioni sui dispositivi. Le informazioni inviate includono un\'identificatore unico che non compromette in alcun modo la tua privacy o dati personali.\n\nPer vedere un esempio di dati inviati, tocca Anteprima Dati.</string>
+     <string name="enable_reporting_title">Attiva report</string>
+     <string name="preview_data_title">Anteprima dati</string>
+     <string name="view_stats_title">Vedi statistiche</string>
+diff --git a/res/values-iw/strings.xml b/res/values-iw/strings.xml
+index 9ffe3c9..a877224 100644
+--- a/res/values-iw/strings.xml
++++ b/res/values-iw/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">הגדרות LineageOS</string>
++    <string name="cmparts_title">הגדרות Techzaster UI</string>
+     <string name="loading">טוען\u2026</string>
+     <string name="dlg_ok">אישור</string>
+     <string name="cancel">ביטול</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>סה"כ תורמים:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>סה"כ חלקי קוד:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>עדכון אחרון:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">סטטיסטיקות LineageOS</string>
+-    <string name="anonymous_statistics_summary">עזור לשפר את LineageOS על ידי שליחת דיווחי סטטיסטיקות אנונימית</string>
++    <string name="anonymous_statistics_title">סטטיסטיקות Techzaster UI</string>
++    <string name="anonymous_statistics_summary">עזור לשפר את Techzaster UI על ידי שליחת דיווחי סטטיסטיקות אנונימית</string>
+     <string name="anonymous_statistics_warning_title">אודות</string>
+-    <string name="anonymous_statistics_warning">הצטרפות לסטטיסטיקות LineageOS תאפשר שליחת מידע לא אישי למפתחי LineageOS על מנת לאתר את מספר ההתקנות לכל סוג מכשיר. המידע הנשלח כולל מזהה ייחודי, אשר אינו פוגע בפרטיותך או במידע שלך. המידע נשלח עם כל אתחול.\n\nכדי לצפות בדוגמה של מידע שנשלח, הקש על הצג דוגמה.</string>
++    <string name="anonymous_statistics_warning">הצטרפות לסטטיסטיקות Techzaster UI תאפשר שליחת מידע לא אישי למפתחי Techzaster UI על מנת לאתר את מספר ההתקנות לכל סוג מכשיר. המידע הנשלח כולל מזהה ייחודי, אשר אינו פוגע בפרטיותך או במידע שלך. המידע נשלח עם כל אתחול.\n\nכדי לצפות בדוגמה של מידע שנשלח, הקש על הצג דוגמה.</string>
+     <string name="enable_reporting_title">אפשר דיווח</string>
+     <string name="preview_data_title">הצג דוגמה</string>
+     <string name="view_stats_title">הצג סטטיסטיקה</string>
+diff --git a/res/values-ja/strings.xml b/res/values-ja/strings.xml
+index ce56156..b9acc5b 100644
+--- a/res/values-ja/strings.xml
++++ b/res/values-ja/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS の設定</string>
++    <string name="cmparts_title">Techzaster UI の設定</string>
+     <string name="loading">読み込み中...</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">キャンセル</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>貢献者の合計:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>コミットの合計:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>最終更新:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS の統計</string>
+-    <string name="anonymous_statistics_summary">匿名の統計のレポートに同意してLineageOSの改善に協力する</string>
++    <string name="anonymous_statistics_title">Techzaster UI の統計</string>
++    <string name="anonymous_statistics_summary">匿名の統計のレポートに同意してTechzaster UIの改善に協力する</string>
+     <string name="anonymous_statistics_warning_title">情報</string>
+-    <string name="anonymous_statistics_warning">LineageOSの統計に同意すると、端末間のユニークインストール回数を調べるためにLineageOSの開発者への非個人情報の送信を許可します。送信される情報にはユニークIDが含まれますが、プライバシーや個人データが危険にさらされることはありません。データはブート時に送信されます。\n\n送信されるデータの見本は[データをプレビュー]をタップして確認することができます。</string>
++    <string name="anonymous_statistics_warning">Techzaster UIの統計に同意すると、端末間のユニークインストール回数を調べるためにTechzaster UIの開発者への非個人情報の送信を許可します。送信される情報にはユニークIDが含まれますが、プライバシーや個人データが危険にさらされることはありません。データはブート時に送信されます。\n\n送信されるデータの見本は[データをプレビュー]をタップして確認することができます。</string>
+     <string name="enable_reporting_title">レポートを有効化</string>
+     <string name="preview_data_title">データをプレビュー</string>
+     <string name="view_stats_title">統計を表示</string>
+diff --git a/res/values-ka-rGE/strings.xml b/res/values-ka-rGE/strings.xml
+index 5d501c5..0169c29 100644
+--- a/res/values-ka-rGE/strings.xml
++++ b/res/values-ka-rGE/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -17,7 +17,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS-ის პარამეტრები</string>
++    <string name="cmparts_title">Techzaster UI-ის პარამეტრები</string>
+     <string name="cancel">გაუქმება</string>
+     <string name="add">დამატება</string>
+     <string name="settings">პარამეტრები</string>
+diff --git a/res/values-ka/strings.xml b/res/values-ka/strings.xml
+index 8abcc1b..464003b 100644
+--- a/res/values-ka/strings.xml
++++ b/res/values-ka/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS-ის პარამეტრები</string>
++    <string name="cmparts_title">Techzaster UI-ის პარამეტრები</string>
+     <string name="cancel">გაუქმება</string>
+     <string name="add">დამატება</string>
+     <string name="settings">პარამეტრები</string>
+diff --git a/res/values-ko/strings.xml b/res/values-ko/strings.xml
+index c5c13ae..79890a4 100644
+--- a/res/values-ko/strings.xml
++++ b/res/values-ko/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS 설정</string>
++    <string name="cmparts_title">Techzaster UI 설정</string>
+     <string name="loading">불러오는 중\u2026</string>
+     <string name="dlg_ok">확인</string>
+     <string name="cancel">취소</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>총 기여자:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>총 변경 사항:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>마지막 업데이트:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS 통계</string>
+-    <string name="anonymous_statistics_summary">익명의 통계 자료를 보내 LineageOS 개선에 도움 주기</string>
++    <string name="anonymous_statistics_title">Techzaster UI 통계</string>
++    <string name="anonymous_statistics_summary">익명의 통계 자료를 보내 Techzaster UI 개선에 도움 주기</string>
+     <string name="anonymous_statistics_warning_title">정보</string>
+-    <string name="anonymous_statistics_warning">LineageOS 통계를 사용하면 장치 고유의 설치 상태를 추적하기 위해 개인 정보를 포함하지 않은 정보가 LineageOS의 개발자에게 전송됩니다. 정보는 매번 부팅할 때마다 전송됩니다.\n\n전송되는 정보를 보려면 데이터 미리보기를 누르세요.</string>
++    <string name="anonymous_statistics_warning">Techzaster UI 통계를 사용하면 장치 고유의 설치 상태를 추적하기 위해 개인 정보를 포함하지 않은 정보가 Techzaster UI의 개발자에게 전송됩니다. 정보는 매번 부팅할 때마다 전송됩니다.\n\n전송되는 정보를 보려면 데이터 미리보기를 누르세요.</string>
+     <string name="enable_reporting_title">보고 사용</string>
+     <string name="preview_data_title">데이터 미리보기</string>
+     <string name="view_stats_title">통계 보기</string>
+diff --git a/res/values-mk-rMK/strings.xml b/res/values-mk-rMK/strings.xml
+index dc9d71f..22af3a3 100644
+--- a/res/values-mk-rMK/strings.xml
++++ b/res/values-mk-rMK/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -17,7 +17,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Поставки</string>
++    <string name="cmparts_title">Techzaster UI Поставки</string>
+     <string name="loading">Вчитување\u2026</string>
+     <string name="dlg_ok">ОК</string>
+     <string name="cancel">Откажи</string>
+@@ -403,10 +403,10 @@
+     <string name="contributions_info_msg">&lt;b&gt;Вкупно соработници:&lt;/b&gt; &lt;xliff:g id="total_contributors"&gt;%1$s&lt;/xliff:g&gt;&lt;br/&gt;&lt;br/&gt;
+                  &lt;b&gt;Вкупно придонеси:&lt;/b&gt; &lt;xliff:g id="total_commits"&gt;%2$s&lt;/xliff:g&gt;&lt;br/&gt;&lt;br/&gt;
+                  &lt;b&gt;Последно ажурирање:&lt;/b&gt; &lt;xliff:g id="date"&gt;%3$s&lt;/xliff:g&gt;</string>
+-    <string name="anonymous_statistics_title">LineageOS статистика</string>
+-    <string name="anonymous_statistics_summary">Помогнете за подобрувањето на LineageOS со одбирање на анонимно известување за статистика</string>
++    <string name="anonymous_statistics_title">Techzaster UI статистика</string>
++    <string name="anonymous_statistics_summary">Помогнете за подобрувањето на Techzaster UI со одбирање на анонимно известување за статистика</string>
+     <string name="anonymous_statistics_warning_title">За</string>
+-    <string name="anonymous_statistics_warning">Откажувањето во LineageOS статистика ќе им овозможи на не-лични податоци да бидат доставени до програмерите на LineageOS за да ги следат уникатните инсталации низ уредите. Доставените информации вклучуваат уникатен идентификатор, што не ја загрозува вашата приватност или лични податоци. Податоците се поднесуваат за време на секое подигање.\n\nЗа пример на податоците што се доставуваат, допрете на преглед на податоци.</string>
++    <string name="anonymous_statistics_warning">Откажувањето во Techzaster UI статистика ќе им овозможи на не-лични податоци да бидат доставени до програмерите на Techzaster UI за да ги следат уникатните инсталации низ уредите. Доставените информации вклучуваат уникатен идентификатор, што не ја загрозува вашата приватност или лични податоци. Податоците се поднесуваат за време на секое подигање.\n\nЗа пример на податоците што се доставуваат, допрете на преглед на податоци.</string>
+     <string name="enable_reporting_title">Овозможи извештај</string>
+     <string name="preview_data_title">Преглед на податоци</string>
+     <string name="view_stats_title">Прикажи ги статистиките</string>
+diff --git a/res/values-mk/strings.xml b/res/values-mk/strings.xml
+index 76eea2c..28d6463 100644
+--- a/res/values-mk/strings.xml
++++ b/res/values-mk/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Поставки</string>
++    <string name="cmparts_title">Techzaster UI Поставки</string>
+     <string name="loading">Вчитување\u2026</string>
+     <string name="dlg_ok">ОК</string>
+     <string name="cancel">Откажи</string>
+@@ -402,10 +402,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Вкупно соработници:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Вкупно придонеси:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Последно ажурирање:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS статистика</string>
+-    <string name="anonymous_statistics_summary">Помогнете за подобрувањето на LineageOS со одбирање на анонимно известување за статистика</string>
++    <string name="anonymous_statistics_title">Techzaster UI статистика</string>
++    <string name="anonymous_statistics_summary">Помогнете за подобрувањето на Techzaster UI со одбирање на анонимно известување за статистика</string>
+     <string name="anonymous_statistics_warning_title">За</string>
+-    <string name="anonymous_statistics_warning">Откажувањето во LineageOS статистика ќе им овозможи на не-лични податоци да бидат доставени до програмерите на LineageOS за да ги следат уникатните инсталации низ уредите. Доставените информации вклучуваат уникатен идентификатор, што не ја загрозува вашата приватност или лични податоци. Податоците се поднесуваат за време на секое подигање.\n\nЗа пример на податоците што се доставуваат, допрете на преглед на податоци.</string>
++    <string name="anonymous_statistics_warning">Откажувањето во Techzaster UI статистика ќе им овозможи на не-лични податоци да бидат доставени до програмерите на Techzaster UI за да ги следат уникатните инсталации низ уредите. Доставените информации вклучуваат уникатен идентификатор, што не ја загрозува вашата приватност или лични податоци. Податоците се поднесуваат за време на секое подигање.\n\nЗа пример на податоците што се доставуваат, допрете на преглед на податоци.</string>
+     <string name="enable_reporting_title">Овозможи извештај</string>
+     <string name="preview_data_title">Преглед на податоци</string>
+     <string name="view_stats_title">Прикажи ги статистиките</string>
+diff --git a/res/values-nb/strings.xml b/res/values-nb/strings.xml
+index 42bf2da..9dc90de 100644
+--- a/res/values-nb/strings.xml
++++ b/res/values-nb/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Innstillinger</string>
++    <string name="cmparts_title">Techzaster UI Innstillinger</string>
+     <string name="loading">Laster inn\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Avbryt</string>
+@@ -402,10 +402,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Totalt antall bidragsytere:</b><xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Totalt antall utførelser:</b><xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Siste oppdatering:</b><xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS-statistikk</string>
+-    <string name="anonymous_statistics_summary">Hjelp oss med å gjøre LineageOS bedre ved å velge å sende inn anonym statistikkrapportering</string>
++    <string name="anonymous_statistics_title">Techzaster UI-statistikk</string>
++    <string name="anonymous_statistics_summary">Hjelp oss med å gjøre Techzaster UI bedre ved å velge å sende inn anonym statistikkrapportering</string>
+     <string name="anonymous_statistics_warning_title">Om</string>
+-    <string name="anonymous_statistics_warning">Ved å bli med i innsamlingen av LineageOS statistikk vil ikke-personlige data bli sendt til utviklerne av LineageOS for å spore antall unike installasjoner spredt over typer enheter. Informasjonen som sendes inkluderer en unik identitetskode, som ikke kompromitterer ditt personvern eller dine personlige data. Data blir sendt ved hver oppstart.\n\nFor ett eksempel over data som blir sendt, trykk på Forhåndsvis data.</string>
++    <string name="anonymous_statistics_warning">Ved å bli med i innsamlingen av Techzaster UI statistikk vil ikke-personlige data bli sendt til utviklerne av Techzaster UI for å spore antall unike installasjoner spredt over typer enheter. Informasjonen som sendes inkluderer en unik identitetskode, som ikke kompromitterer ditt personvern eller dine personlige data. Data blir sendt ved hver oppstart.\n\nFor ett eksempel over data som blir sendt, trykk på Forhåndsvis data.</string>
+     <string name="enable_reporting_title">Aktiver rapportering</string>
+     <string name="preview_data_title">Forhåndsvis data</string>
+     <string name="view_stats_title">Vis statistikk</string>
+diff --git a/res/values-nl/strings.xml b/res/values-nl/strings.xml
+index cef6a50..6ce2335 100644
+--- a/res/values-nl/strings.xml
++++ b/res/values-nl/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS-instellingen</string>
++    <string name="cmparts_title">Techzaster UI-instellingen</string>
+     <string name="loading">Laden\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Annuleren</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Aantal bijdragers:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Aantal commits:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Laatste update:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS-statistieken</string>
+-    <string name="anonymous_statistics_summary">Help LineageOS te verbeteren door anonieme statistieken te verzenden</string>
++    <string name="anonymous_statistics_title">Techzaster UI-statistieken</string>
++    <string name="anonymous_statistics_summary">Help Techzaster UI te verbeteren door anonieme statistieken te verzenden</string>
+     <string name="anonymous_statistics_warning_title">Over</string>
+-    <string name="anonymous_statistics_warning">Door statistieken verzenden toe te staan worden tijdens het opstarten anonieme gegevens naar de ontwikkelaars van LineageOS verzonden om unieke installaties te kunnen volgen. In de gegevens zit een uniek id-nummer verwerkt, dat uw privacy niet schendt.\n\nOm een voorbeeld te zien, tikt u op \'Voorbeeld van gegevens\'.</string>
++    <string name="anonymous_statistics_warning">Door statistieken verzenden toe te staan worden tijdens het opstarten anonieme gegevens naar de ontwikkelaars van Techzaster UI verzonden om unieke installaties te kunnen volgen. In de gegevens zit een uniek id-nummer verwerkt, dat uw privacy niet schendt.\n\nOm een voorbeeld te zien, tikt u op \'Voorbeeld van gegevens\'.</string>
+     <string name="enable_reporting_title">Statistieken verzenden</string>
+     <string name="preview_data_title">Voorbeeld van gegevens</string>
+     <string name="view_stats_title">Statistieken tonen</string>
+diff --git a/res/values-oc-rFR/strings.xml b/res/values-oc-rFR/strings.xml
+index 767d535..d123265 100644
+--- a/res/values-oc-rFR/strings.xml
++++ b/res/values-oc-rFR/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-pl/strings.xml b/res/values-pl/strings.xml
+index f2cfdd1..5cf99b0 100644
+--- a/res/values-pl/strings.xml
++++ b/res/values-pl/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Ustawienia LineageOS</string>
++    <string name="cmparts_title">Ustawienia Techzaster UI</string>
+     <string name="loading">Ładowanie\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Anuluj</string>
+@@ -420,11 +420,11 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Wszyscy współtwórcy:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Wszystkie poprawki:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Ostatnia aktualizacja:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Statystyki LineageOS</string>
+-    <string name="anonymous_statistics_summary">Pomóż ulepszyć LineageOS, pozwalając na wysyłanie anonimowych statystyk</string>
++    <string name="anonymous_statistics_title">Statystyki Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Pomóż ulepszyć Techzaster UI, pozwalając na wysyłanie anonimowych statystyk</string>
+     <string name="anonymous_statistics_warning_title">O programie</string>
+-    <string name="anonymous_statistics_warning">Wyrażenie zgody na udział w Statystykach LineageOS zezwoli na przesył anonimowych danych do
+-        developerów LineageOS, aby śledzić ilość unikalnych instalacji na urządzeniach . Informacje zawierają unikalny identyfikator,
++    <string name="anonymous_statistics_warning">Wyrażenie zgody na udział w Statystykach Techzaster UI zezwoli na przesył anonimowych danych do
++        developerów Techzaster UI, aby śledzić ilość unikalnych instalacji na urządzeniach . Informacje zawierają unikalny identyfikator,
+        który nie narusza twojej prywatności lub prywatnych danych. Dane są wysyłane przy każdym uruchomieniu.\n\nAby zobaczyć przykład przesyłanych danych naciśnij Podgląd Danych.</string>
+     <string name="enable_reporting_title">Włącz raportowanie</string>
+     <string name="preview_data_title">Podgląd danych</string>
+diff --git a/res/values-pt-rBR/strings.xml b/res/values-pt-rBR/strings.xml
+index 02e1599..cd2ae4f 100644
+--- a/res/values-pt-rBR/strings.xml
++++ b/res/values-pt-rBR/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Quantidade de colaboradores:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Quantidade de colaborações:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Última atualização:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Estatísticas LineageOS</string>
+-    <string name="anonymous_statistics_summary">Ajude a melhorar o LineageOS optando por enviar estatísticas anônimas</string>
++    <string name="anonymous_statistics_title">Estatísticas Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Ajude a melhorar o Techzaster UI optando por enviar estatísticas anônimas</string>
+     <string name="anonymous_statistics_warning_title">Sobre</string>
+-    <string name="anonymous_statistics_warning">Optar por enviar estatísticas anônimas ao LineageOS permitirá que dados não pessoais sejam enviados aos desenvolvedores do LineageOS para rastrear instalações únicas em dispositivos. As informações enviadas incluem um identificador único que não compromete sua privacidade ou dados pessoais. Os dados são enviados durante cada inicialização.\n\nPara ver um exemplo dos dados enviados, toque em \'Pré-visualizar dados\'.</string>
++    <string name="anonymous_statistics_warning">Optar por enviar estatísticas anônimas ao Techzaster UI permitirá que dados não pessoais sejam enviados aos desenvolvedores do Techzaster UI para rastrear instalações únicas em dispositivos. As informações enviadas incluem um identificador único que não compromete sua privacidade ou dados pessoais. Os dados são enviados durante cada inicialização.\n\nPara ver um exemplo dos dados enviados, toque em \'Pré-visualizar dados\'.</string>
+     <string name="enable_reporting_title">Ativar relatório</string>
+     <string name="preview_data_title">Pré-visualizar dados</string>
+     <string name="view_stats_title">Ver estatísticas</string>
+diff --git a/res/values-pt-rPT/strings.xml b/res/values-pt-rPT/strings.xml
+index 95250d9..d671cf3 100644
+--- a/res/values-pt-rPT/strings.xml
++++ b/res/values-pt-rPT/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Definições LineageOS</string>
++    <string name="cmparts_title">Definições Techzaster UI</string>
+     <string name="loading">A carregar\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Cancelar</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Total de colaboradores:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Total de contribuições:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Última atualização:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Estatísticas LineageOS</string>
+-    <string name="anonymous_statistics_summary">Ajude a melhorar a LineageOS optando por ativar o envio do relatório de estatísticas anónimas</string>
++    <string name="anonymous_statistics_title">Estatísticas Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Ajude a melhorar a Techzaster UI optando por ativar o envio do relatório de estatísticas anónimas</string>
+     <string name="anonymous_statistics_warning_title">Acerca de</string>
+-    <string name="anonymous_statistics_warning">Optar pelo envio de estatísticas LineageOS vai permitir que dados não pessoais sejam transmitidos aos desenvolvedores da LineageOS, para rastrearem instalações nos dispositivos. As informações submetidas incluem um identificador único, que não compromete a sua privacidade ou dados pessoais. Os dados são enviados durante cada inicialização.\n\nPara um exemplo dos dados que são enviados, toque em \'Pré-visualizar dados\'.</string>
++    <string name="anonymous_statistics_warning">Optar pelo envio de estatísticas Techzaster UI vai permitir que dados não pessoais sejam transmitidos aos desenvolvedores da Techzaster UI, para rastrearem instalações nos dispositivos. As informações submetidas incluem um identificador único, que não compromete a sua privacidade ou dados pessoais. Os dados são enviados durante cada inicialização.\n\nPara um exemplo dos dados que são enviados, toque em \'Pré-visualizar dados\'.</string>
+     <string name="enable_reporting_title">Ativar relatório</string>
+     <string name="preview_data_title">Pré-visualizar dados</string>
+     <string name="view_stats_title">Ver estatísticas</string>
+diff --git a/res/values-ro/strings.xml b/res/values-ro/strings.xml
+index 135e360..42d54e6 100644
+--- a/res/values-ro/strings.xml
++++ b/res/values-ro/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Setări LineageOS</string>
++    <string name="cmparts_title">Setări Techzaster UI</string>
+     <string name="loading">Încărcare\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Revocați</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Total contribuitori:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Total contribuții:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Ultima actualizare:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Statistici LineageOS</string>
+-    <string name="anonymous_statistics_summary">Ajutați la îmbunătățirea lui LineageOS prin optarea pentru raportarea anonimă de statistici</string>
++    <string name="anonymous_statistics_title">Statistici Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Ajutați la îmbunătățirea lui Techzaster UI prin optarea pentru raportarea anonimă de statistici</string>
+     <string name="anonymous_statistics_warning_title">Despre</string>
+-    <string name="anonymous_statistics_warning">Optând să trimiteți Statistici LineageOS, le permiteți dezvoltatorilor LineageOS
++    <string name="anonymous_statistics_warning">Optând să trimiteți Statistici Techzaster UI, le permiteți dezvoltatorilor Techzaster UI
+         să primească date ne-personale pentru a urmări instalările unice la o gamă mare de dispozitive. Informația transmisă include un identificator unic,
+         care nu vă compromite intimitatea sau datele personale. Datele sunt trimise la fiecare pornire a dispozitivului.\n\nPentru a vedea un exemplu de date ce se trimit, apăsați pe Previzualizare Date.</string>
+     <string name="enable_reporting_title">Activare raportare</string>
+diff --git a/res/values-ru/strings.xml b/res/values-ru/strings.xml
+index dd9512e..5c61bb3 100644
+--- a/res/values-ru/strings.xml
++++ b/res/values-ru/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Настройки LineageOS</string>
++    <string name="cmparts_title">Настройки Techzaster UI</string>
+     <string name="loading">Загрузка\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Отмена</string>
+@@ -421,9 +421,9 @@
+ <b>Всего коммитов:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+ <b>Последнее обновление:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+     <string name="anonymous_statistics_title">Отправка статистики</string>
+-    <string name="anonymous_statistics_summary">Помогите сделать LineageOS лучше, разрешив отправку анонимной статистики</string>
++    <string name="anonymous_statistics_summary">Помогите сделать Techzaster UI лучше, разрешив отправку анонимной статистики</string>
+     <string name="anonymous_statistics_warning_title">Сведения</string>
+-    <string name="anonymous_statistics_warning">Анонимные отчеты позволяют разработчикам LineageOS отслеживать работу ОС на различных устройствах. Отправляемая информация включает название устройства, версию прошивки и уникальный идентификатор, что никаким образом не затрагивает Вашу конфиденциальность. Данные отправляются при каждой загрузке устройства.\n\nЧтобы просмотреть пример, нажмите «Просмотр данных».</string>
++    <string name="anonymous_statistics_warning">Анонимные отчеты позволяют разработчикам Techzaster UI отслеживать работу ОС на различных устройствах. Отправляемая информация включает название устройства, версию прошивки и уникальный идентификатор, что никаким образом не затрагивает Вашу конфиденциальность. Данные отправляются при каждой загрузке устройства.\n\nЧтобы просмотреть пример, нажмите «Просмотр данных».</string>
+     <string name="enable_reporting_title">Разрешить отправку статистики</string>
+     <string name="preview_data_title">Предварительный просмотр данных</string>
+     <string name="view_stats_title">Просмотр статистики</string>
+diff --git a/res/values-sc-rIT/strings.xml b/res/values-sc-rIT/strings.xml
+index 3c3e4fc..a027d5f 100644
+--- a/res/values-sc-rIT/strings.xml
++++ b/res/values-sc-rIT/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-sk/strings.xml b/res/values-sk/strings.xml
+index 5417f88..679410d 100644
+--- a/res/values-sk/strings.xml
++++ b/res/values-sk/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Nastavenia LineageOS</string>
++    <string name="cmparts_title">Nastavenia Techzaster UI</string>
+     <string name="loading">Nahrávanie\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Zrušiť</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Celkom prispievateľov:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+ <b>Celkom príspevkov:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+ <b>Posledná aktualizácia:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Štatistiky LineageOS</string>
+-    <string name="anonymous_statistics_summary">Pomôžte zlepšiť LineageOS povolením anonymných štatistických hlásení</string>
++    <string name="anonymous_statistics_title">Štatistiky Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Pomôžte zlepšiť Techzaster UI povolením anonymných štatistických hlásení</string>
+     <string name="anonymous_statistics_warning_title">O</string>
+-    <string name="anonymous_statistics_warning">Povolením štatistík LineageOS súhlasíte s odosielaním neosobných údajov vývojárom LineageOSu, za účelom evidencie jedinečných inštalácií naprieč všetkými zariadeniami. Informácie obsahujú unikátny identifikátor, ktorý neohrozuje vaše súkromné alebo osobné údaje. Údaje sú odoslané pri každom spustení.\n\nNa ukážku odosielaných údajov kliknite na Prehľad údajov.</string>
++    <string name="anonymous_statistics_warning">Povolením štatistík Techzaster UI súhlasíte s odosielaním neosobných údajov vývojárom Techzaster UIu, za účelom evidencie jedinečných inštalácií naprieč všetkými zariadeniami. Informácie obsahujú unikátny identifikátor, ktorý neohrozuje vaše súkromné alebo osobné údaje. Údaje sú odoslané pri každom spustení.\n\nNa ukážku odosielaných údajov kliknite na Prehľad údajov.</string>
+     <string name="enable_reporting_title">Povoliť hlásenia</string>
+     <string name="preview_data_title">Prehľad údajov</string>
+     <string name="view_stats_title">Zobraziť štatistiky</string>
+diff --git a/res/values-sl/strings.xml b/res/values-sl/strings.xml
+index 09d6e5c..e62d51d 100644
+--- a/res/values-sl/strings.xml
++++ b/res/values-sl/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Nastavitve LineageOS</string>
++    <string name="cmparts_title">Nastavitve Techzaster UI</string>
+     <string name="loading">Nalaganje \u2026</string>
+     <string name="dlg_ok">V redu</string>
+     <string name="cancel">Prekliči</string>
+@@ -420,11 +420,11 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Skupaj sodelavcev:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Skupaj prispevkov:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Zadnja posodobitev:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Statistika LineageOS</string>
+-    <string name="anonymous_statistics_summary">Pomagajte izboljšati LineageOS tako, da izberete pošiljanje anonimne statistike</string>
++    <string name="anonymous_statistics_title">Statistika Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Pomagajte izboljšati Techzaster UI tako, da izberete pošiljanje anonimne statistike</string>
+     <string name="anonymous_statistics_warning_title">O aplikaciji</string>
+-    <string name="anonymous_statistics_warning">Izbira statistike LineageOS bo dovolila pošiljanje neosebnih podatkov
+-        razvijalcem LineageOS-a, da lahko sledijo edinstvenim namestitvam v napravah. Poslani podatki vključujejo edinstven določilnik,
++    <string name="anonymous_statistics_warning">Izbira statistike Techzaster UI bo dovolila pošiljanje neosebnih podatkov
++        razvijalcem Techzaster UI-a, da lahko sledijo edinstvenim namestitvam v napravah. Poslani podatki vključujejo edinstven določilnik,
+         ki ne ogroža vaše zasebnosti in osebnih podatkov. Podatki so poslani ob vsakem zagonu.\n\nZa primer poslanih podatkov tapnite Predogled podatkov.</string>
+     <string name="enable_reporting_title">Omogoči poročanje</string>
+     <string name="preview_data_title">Predogled podatkov</string>
+diff --git a/res/values-sq-rAL/strings.xml b/res/values-sq-rAL/strings.xml
+index e98dd6e..19e478c 100644
+--- a/res/values-sq-rAL/strings.xml
++++ b/res/values-sq-rAL/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -17,7 +17,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Parametrat e LineageOS</string>
++    <string name="cmparts_title">Parametrat e Techzaster UI</string>
+     <string name="loading">Duke u ngarkuar\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Anullo</string>
+@@ -417,10 +417,10 @@
+     <string name="contributor_info_msg"><b>Emri:</b> <xliff:g id="name">%1$s</xliff:g><br/><br/>                 <b>Pseudonimi:</b> <xliff:g id="nick">%2$s</xliff:g><br/><br/>                 <b>Kontributet:</b> <xliff:g id="commits">%3$s</xliff:g></string>
+     <string name="contributions_info_menu">Informacion rreth kontribimeve</string>
+     <string name="contributions_info_msg">&lt;b&gt;Kontribuesit në total:&lt;/b&gt; &lt;xliff:g id="total_contributors"&gt;%1$s&lt;/xliff:g&gt;&lt;br/&gt;&lt;br/&gt;                 &lt;b&gt;Kontribimet në total:&lt;/b&gt; &lt;xliff:g id="total_commits"&gt;%2$s&lt;/xliff:g&gt;&lt;br/&gt;&lt;br/&gt;                 &lt;b&gt;Përditësimi i fundit:&lt;/b&gt; &lt;xliff:g id="date"&gt;%3$s&lt;/xliff:g&gt;</string>
+-    <string name="anonymous_statistics_title">Statistikat e LineageOS</string>
+-    <string name="anonymous_statistics_summary">Ndihmo në përmirësimin e LineageOS duke lejuar raportimin anonim të statistikave</string>
++    <string name="anonymous_statistics_title">Statistikat e Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Ndihmo në përmirësimin e Techzaster UI duke lejuar raportimin anonim të statistikave</string>
+     <string name="anonymous_statistics_warning_title">Rreth nesh</string>
+-    <string name="anonymous_statistics_warning">Aktivizimi i Statistikave të LineageOS do të lejojë dërgimin e të dhënave jo-personale tek        zhvilluesit e LineageOS që të ndjekin instalime unike në pajisje të ndryshme. Informacioni i dërguar përmban një identifikues unik,        që nuk kompromenton privatësinë apo të dhënat e tua personale. Të dhënat dërgohen gjatë rindezjes së pajisjes.\n\nPër të parë një shëmbull të të dhënave që dërgohen, shtypni në Inspekto të Dhënat.</string>
++    <string name="anonymous_statistics_warning">Aktivizimi i Statistikave të Techzaster UI do të lejojë dërgimin e të dhënave jo-personale tek        zhvilluesit e Techzaster UI që të ndjekin instalime unike në pajisje të ndryshme. Informacioni i dërguar përmban një identifikues unik,        që nuk kompromenton privatësinë apo të dhënat e tua personale. Të dhënat dërgohen gjatë rindezjes së pajisjes.\n\nPër të parë një shëmbull të të dhënave që dërgohen, shtypni në Inspekto të Dhënat.</string>
+     <string name="enable_reporting_title">Aktivizo raportimin</string>
+     <string name="preview_data_title">Inspekto të dhënat</string>
+     <string name="view_stats_title">Shiko statistikat</string>
+diff --git a/res/values-sq/strings.xml b/res/values-sq/strings.xml
+index 7a0331e..fe1ec84 100644
+--- a/res/values-sq/strings.xml
++++ b/res/values-sq/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Parametrat e LineageOS</string>
++    <string name="cmparts_title">Parametrat e Techzaster UI</string>
+     <string name="loading">Duke u ngarkuar\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Anullo</string>
+@@ -416,10 +416,10 @@
+     <string name="contributor_info_msg"><b>Emri:</b> <xliff:g id="name">%1$s</xliff:g><br/><br/>                 <b>Pseudonimi:</b> <xliff:g id="nick">%2$s</xliff:g><br/><br/>                 <b>Kontributet:</b> <xliff:g id="commits">%3$s</xliff:g></string>
+     <string name="contributions_info_menu">Informacion rreth kontribimeve</string>
+     <string name="contributions_info_msg"><![CDATA[<b>Kontribuesit në total:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>                 <b>Kontribimet në total:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>                 <b>Përditësimi i fundit:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Statistikat e LineageOS</string>
+-    <string name="anonymous_statistics_summary">Ndihmo në përmirësimin e LineageOS duke lejuar raportimin anonim të statistikave</string>
++    <string name="anonymous_statistics_title">Statistikat e Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Ndihmo në përmirësimin e Techzaster UI duke lejuar raportimin anonim të statistikave</string>
+     <string name="anonymous_statistics_warning_title">Rreth nesh</string>
+-    <string name="anonymous_statistics_warning">Aktivizimi i Statistikave të LineageOS do të lejojë dërgimin e të dhënave jo-personale tek        zhvilluesit e LineageOS që të ndjekin instalime unike në pajisje të ndryshme. Informacioni i dërguar përmban një identifikues unik,        që nuk kompromenton privatësinë apo të dhënat e tua personale. Të dhënat dërgohen gjatë rindezjes së pajisjes.\n\nPër të parë një shëmbull të të dhënave që dërgohen, shtypni në Inspekto të Dhënat.</string>
++    <string name="anonymous_statistics_warning">Aktivizimi i Statistikave të Techzaster UI do të lejojë dërgimin e të dhënave jo-personale tek        zhvilluesit e Techzaster UI që të ndjekin instalime unike në pajisje të ndryshme. Informacioni i dërguar përmban një identifikues unik,        që nuk kompromenton privatësinë apo të dhënat e tua personale. Të dhënat dërgohen gjatë rindezjes së pajisjes.\n\nPër të parë një shëmbull të të dhënave që dërgohen, shtypni në Inspekto të Dhënat.</string>
+     <string name="enable_reporting_title">Aktivizo raportimin</string>
+     <string name="preview_data_title">Inspekto të dhënat</string>
+     <string name="view_stats_title">Shiko statistikat</string>
+diff --git a/res/values-sr-rCS/strings.xml b/res/values-sr-rCS/strings.xml
+index 767d535..d123265 100644
+--- a/res/values-sr-rCS/strings.xml
++++ b/res/values-sr-rCS/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-sr/strings.xml b/res/values-sr/strings.xml
+index 5c50661..a0b04bd 100644
+--- a/res/values-sr/strings.xml
++++ b/res/values-sr/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Подешавања LineageOS-а</string>
++    <string name="cmparts_title">Подешавања Techzaster UI-а</string>
+     <string name="loading">Учитавам\u2026</string>
+     <string name="dlg_ok">У реду</string>
+     <string name="cancel">Откажи</string>
+@@ -421,9 +421,9 @@
+                  <b>Укупно доприноса:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Последња измена:</b> <xliff:g id="date">%3$s</xliff:g>]]>;</string>
+     <string name="anonymous_statistics_title">Слање статистике</string>
+-    <string name="anonymous_statistics_summary">Помозите нам да побољшамо LineageOS тако што ћете дозволити слање анонимне статистике.</string>
++    <string name="anonymous_statistics_summary">Помозите нам да побољшамо Techzaster UI тако што ћете дозволити слање анонимне статистике.</string>
+     <string name="anonymous_statistics_warning_title">Информације</string>
+-    <string name="anonymous_statistics_warning">Анонимни подаци омогућавају програмерима LineageOS-а да прате рад ОС на различитим уређајима. Јединствени идентификатор, који не угрожава вашу приватност, шаље се по сваком подизању система.\n\nДа бисте видели пример, додирните „Прегледај податке“.</string>
++    <string name="anonymous_statistics_warning">Анонимни подаци омогућавају програмерима Techzaster UI-а да прате рад ОС на различитим уређајима. Јединствени идентификатор, који не угрожава вашу приватност, шаље се по сваком подизању система.\n\nДа бисте видели пример, додирните „Прегледај податке“.</string>
+     <string name="enable_reporting_title">Омогући</string>
+     <string name="preview_data_title">Прегледај податке</string>
+     <string name="view_stats_title">Прикажи статистику</string>
+diff --git a/res/values-sv/strings.xml b/res/values-sv/strings.xml
+index 9e19d09..2a5a6db 100644
+--- a/res/values-sv/strings.xml
++++ b/res/values-sv/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Inställningar för LineageOS</string>
++    <string name="cmparts_title">Inställningar för Techzaster UI</string>
+     <string name="loading">Laddar\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Avbryt</string>
+@@ -221,7 +221,7 @@
+     <string name="status_bar_battery_style_hidden">Dold</string>
+     <string name="status_bar_battery_percentage_default">Dold</string>
+     <string name="status_bar_icons_title">Statusfältsikoner</string>
+-    <string name="anonymous_statistics_title">LineageOS statistik</string>
++    <string name="anonymous_statistics_title">Techzaster UI statistik</string>
+     <string name="preview_id_title">Unikt ID</string>
+     <string name="preview_device_title">Enhet</string>
+     <string name="preview_version_title">Version</string>
+diff --git a/res/values-th/strings.xml b/res/values-th/strings.xml
+index 77356ef..61fb9f1 100644
+--- a/res/values-th/strings.xml
++++ b/res/values-th/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">การตั้งค่า LineageOS</string>
++    <string name="cmparts_title">การตั้งค่า Techzaster UI</string>
+     <string name="loading">กำลังโหลด\u2026</string>
+     <string name="dlg_ok">ตกลง</string>
+     <string name="cancel">ยกเลิก</string>
+@@ -399,10 +399,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>ผู้ร่วมพัฒนาทั้งหมด:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>การเข้าร่วมทั้งหมด:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>ปรับปรุงล่าสุด:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">สถิติ LineageOS</string>
+-    <string name="anonymous_statistics_summary">ช่วยทำให้ LineageOS ดีขึ้นโดยการส่งรายงานสถิติแบบไม่ระบุตัวตน</string>
++    <string name="anonymous_statistics_title">สถิติ Techzaster UI</string>
++    <string name="anonymous_statistics_summary">ช่วยทำให้ Techzaster UI ดีขึ้นโดยการส่งรายงานสถิติแบบไม่ระบุตัวตน</string>
+     <string name="anonymous_statistics_warning_title">เกี่ยวกับ</string>
+-    <string name="anonymous_statistics_warning">การส่งสถิติแบบไม่ระบุตัวตนไปยัง LineageOS จะอนุญาตให้ส่งข้อมูลที่ไม่ใช่ข้อมูลส่วนตัวไปยังนักพัฒนาของ LineageOS เพื่อติดตามการติดตั้งบนอุปกรณ์ทั้งหมด ข้อมูลที่ถูกส่งรวมไปถึงตัวระบุลักษณะเฉพาะ\n\nซึ่งไม่ส่งผลกระทบต่อความเป็นส่วนตัวและข้อมูลส่วนบุคคลของคุณ โดยจะส่งข้อมูลทุกครั้งที่เริ่มระบบ\n\n แตะ \"แสดงตัวอย่างข้อมูล\" เพื่อดูตัวอย่างข้อมูลที่ถูกส่ง</string>
++    <string name="anonymous_statistics_warning">การส่งสถิติแบบไม่ระบุตัวตนไปยัง Techzaster UI จะอนุญาตให้ส่งข้อมูลที่ไม่ใช่ข้อมูลส่วนตัวไปยังนักพัฒนาของ Techzaster UI เพื่อติดตามการติดตั้งบนอุปกรณ์ทั้งหมด ข้อมูลที่ถูกส่งรวมไปถึงตัวระบุลักษณะเฉพาะ\n\nซึ่งไม่ส่งผลกระทบต่อความเป็นส่วนตัวและข้อมูลส่วนบุคคลของคุณ โดยจะส่งข้อมูลทุกครั้งที่เริ่มระบบ\n\n แตะ \"แสดงตัวอย่างข้อมูล\" เพื่อดูตัวอย่างข้อมูลที่ถูกส่ง</string>
+     <string name="enable_reporting_title">เปิดการรายงาน</string>
+     <string name="preview_data_title">แสดงตัวอย่างข้อมูล</string>
+     <string name="view_stats_title">ดูสถิติ</string>
+diff --git a/res/values-tr/strings.xml b/res/values-tr/strings.xml
+index 9ed7c07..5f903b6 100644
+--- a/res/values-tr/strings.xml
++++ b/res/values-tr/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS Ayarları</string>
++    <string name="cmparts_title">Techzaster UI Ayarları</string>
+     <string name="loading">Yükleniyor\u2026</string>
+     <string name="dlg_ok">TAMAM</string>
+     <string name="cancel">İptal</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Tüm katkı sağlayanlar:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Toplam girdi:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Son güncelleme:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS istatistikleri</string>
+-    <string name="anonymous_statistics_summary">LineageOS\'u geliştirmeye yardım etmek için anonim istatistik göndermeyi kabul edin</string>
++    <string name="anonymous_statistics_title">Techzaster UI istatistikleri</string>
++    <string name="anonymous_statistics_summary">Techzaster UI\'u geliştirmeye yardım etmek için anonim istatistik göndermeyi kabul edin</string>
+     <string name="anonymous_statistics_warning_title">Hakkında</string>
+-    <string name="anonymous_statistics_warning">LineageOS İstatistiklerine dahil olmak kişisel olmayan verilerin LineageOS geliştiricilerine cihazlar arasındaki benzersiz yüklemeleri takip etmeleri için gönderilmesine izin verir. Bu bilgi, kişisel bilgi içermeyen ve gizliliğinizi tehdit etmeyen bir benzersiz numara da içerir. Veri her başlangıçta gönderilir.\n\nGönderilecek verinin örneğini görmek için Veriyi Önizle butonunu kullanın.</string>
++    <string name="anonymous_statistics_warning">Techzaster UI İstatistiklerine dahil olmak kişisel olmayan verilerin Techzaster UI geliştiricilerine cihazlar arasındaki benzersiz yüklemeleri takip etmeleri için gönderilmesine izin verir. Bu bilgi, kişisel bilgi içermeyen ve gizliliğinizi tehdit etmeyen bir benzersiz numara da içerir. Veri her başlangıçta gönderilir.\n\nGönderilecek verinin örneğini görmek için Veriyi Önizle butonunu kullanın.</string>
+     <string name="enable_reporting_title">Raporlamayı etkinleştir</string>
+     <string name="preview_data_title">Veriyi önizle</string>
+     <string name="view_stats_title">İstatistikleri görüntüle</string>
+diff --git a/res/values-uk/strings.xml b/res/values-uk/strings.xml
+index 07d3f4e..24d6e1a 100644
+--- a/res/values-uk/strings.xml
++++ b/res/values-uk/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Налаштування LineageOS</string>
++    <string name="cmparts_title">Налаштування Techzaster UI</string>
+     <string name="loading">Завантаження\u2026</string>
+     <string name="dlg_ok">ОК</string>
+     <string name="cancel">Скаcувати</string>
+@@ -419,10 +419,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Всього учасників проекту:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Всього коммітів:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Останнє оновлення:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Статистика LineageOS</string>
+-    <string name="anonymous_statistics_summary">Допоможіть зробити LineageOS кращим, відправляючи анонімну статистику</string>
++    <string name="anonymous_statistics_title">Статистика Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Допоможіть зробити Techzaster UI кращим, відправляючи анонімну статистику</string>
+     <string name="anonymous_statistics_warning_title">Про</string>
+-    <string name="anonymous_statistics_warning">Анонімні звіти дозволяють розробникам LineageOS відстежувати роботу ОС на різних пристроях. Інформація, що відправляється включає назву пристрою, версію прошивки і унікальний ідентифікатор, що ніяким чином не впливає на Вашу конфіденційність. Дані відправляються при кожному завантаженні пристрою.\n\nЩоб переглянути приклад, натисніть \"Попередній перегляд даних\".</string>
++    <string name="anonymous_statistics_warning">Анонімні звіти дозволяють розробникам Techzaster UI відстежувати роботу ОС на різних пристроях. Інформація, що відправляється включає назву пристрою, версію прошивки і унікальний ідентифікатор, що ніяким чином не впливає на Вашу конфіденційність. Дані відправляються при кожному завантаженні пристрою.\n\nЩоб переглянути приклад, натисніть \"Попередній перегляд даних\".</string>
+     <string name="enable_reporting_title">Увімкнути надсилання звітів</string>
+     <string name="preview_data_title">Попередній перегляд даних</string>
+     <string name="view_stats_title">Перегляд статистики</string>
+diff --git a/res/values-vec-rIT/strings.xml b/res/values-vec-rIT/strings.xml
+index 767d535..d123265 100644
+--- a/res/values-vec-rIT/strings.xml
++++ b/res/values-vec-rIT/strings.xml
+@@ -2,7 +2,7 @@
+ <!--Generated by crowdin.com-->
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+diff --git a/res/values-vi/strings.xml b/res/values-vi/strings.xml
+index e995513..85f30e2 100644
+--- a/res/values-vi/strings.xml
++++ b/res/values-vi/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">Cài đặt LineageOS</string>
++    <string name="cmparts_title">Cài đặt Techzaster UI</string>
+     <string name="loading">Đang tải\u2026</string>
+     <string name="dlg_ok">OK</string>
+     <string name="cancel">Hủy</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>Total contributors:</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>Total commits:</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>Last update:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">Thống kê LineageOS</string>
+-    <string name="anonymous_statistics_summary">Giúp cho LineageOS tốt hơn bằng cách chọn vào báo cáo số liệu thống kê ẩn danh</string>
++    <string name="anonymous_statistics_title">Thống kê Techzaster UI</string>
++    <string name="anonymous_statistics_summary">Giúp cho Techzaster UI tốt hơn bằng cách chọn vào báo cáo số liệu thống kê ẩn danh</string>
+     <string name="anonymous_statistics_warning_title">Về</string>
+-    <string name="anonymous_statistics_warning">Chọn tham gia Thống kê LineageOS sẽ cho phép gửi dữ liệu không liên quan đến cá nhân đến những nhà phát triển của LineageOS để theo dõi số lượt cài đặt duy nhất trên các thiết bị. Thông tin đã gửi sẽ bao gồm một ký hiệu nhận dạng duy nhất, nó sẽ không ảnh hưởng đến sự riêng tư hoặc dữ liệu cá nhân của bạn. Dữ liệu được gửi vào mỗi lần khởi động.\n\nĐể xem mẫu dữ liệu được gửi, chạm vào Xem trước dữ liệu.</string>
++    <string name="anonymous_statistics_warning">Chọn tham gia Thống kê Techzaster UI sẽ cho phép gửi dữ liệu không liên quan đến cá nhân đến những nhà phát triển của Techzaster UI để theo dõi số lượt cài đặt duy nhất trên các thiết bị. Thông tin đã gửi sẽ bao gồm một ký hiệu nhận dạng duy nhất, nó sẽ không ảnh hưởng đến sự riêng tư hoặc dữ liệu cá nhân của bạn. Dữ liệu được gửi vào mỗi lần khởi động.\n\nĐể xem mẫu dữ liệu được gửi, chạm vào Xem trước dữ liệu.</string>
+     <string name="enable_reporting_title">Cho phép báo cáo</string>
+     <string name="preview_data_title">Xem trước dữ liệu</string>
+     <string name="view_stats_title">Xem thống kê</string>
+diff --git a/res/values-zh-rCN/strings.xml b/res/values-zh-rCN/strings.xml
+index b24f4b3..2a81dc5 100644
+--- a/res/values-zh-rCN/strings.xml
++++ b/res/values-zh-rCN/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS 设置</string>
++    <string name="cmparts_title">Techzaster UI 设置</string>
+     <string name="loading">正在加载\u2026</string>
+     <string name="dlg_ok">确定</string>
+     <string name="cancel">取消</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>贡献者总数：</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>提交总数：</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>最后更新：</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS 统计</string>
+-    <string name="anonymous_statistics_summary">开启匿名统计报告以便帮助 LineageOS 未来向更好的方向发展</string>
++    <string name="anonymous_statistics_title">Techzaster UI 统计</string>
++    <string name="anonymous_statistics_summary">开启匿名统计报告以便帮助 Techzaster UI 未来向更好的方向发展</string>
+     <string name="anonymous_statistics_warning_title">关于</string>
+-    <string name="anonymous_statistics_warning">开启 LineageOS 统计将允许非个人数据被提交到 LineageOS 的开发者以便记录各种设备上的唯一安装。提交的信息包含一个唯一的标识符，而不会涉及您的隐私与个人数据。该数据将在每次启动时被提交。\n\n如您想看一个作为被提交数据的实例，请点击预览数据。</string>
++    <string name="anonymous_statistics_warning">开启 Techzaster UI 统计将允许非个人数据被提交到 Techzaster UI 的开发者以便记录各种设备上的唯一安装。提交的信息包含一个唯一的标识符，而不会涉及您的隐私与个人数据。该数据将在每次启动时被提交。\n\n如您想看一个作为被提交数据的实例，请点击预览数据。</string>
+     <string name="enable_reporting_title">开启报告</string>
+     <string name="preview_data_title">预览数据</string>
+     <string name="view_stats_title">查看统计</string>
+diff --git a/res/values-zh-rTW/strings.xml b/res/values-zh-rTW/strings.xml
+index af1eb2f..d9a839b 100644
+--- a/res/values-zh-rTW/strings.xml
++++ b/res/values-zh-rTW/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -16,7 +16,7 @@
+ 	limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <string name="cmparts_title">LineageOS 設定</string>
++    <string name="cmparts_title">Techzaster UI 設定</string>
+     <string name="loading">載入中\u2026</string>
+     <string name="dlg_ok">確定</string>
+     <string name="cancel">取消</string>
+@@ -420,10 +420,10 @@
+     <string name="contributions_info_msg"><![CDATA[<b>總貢獻者：</b> <xliff:g id="total_contributors">%1$s</xliff:g><br/><br/>
+                  <b>總認可：</b> <xliff:g id="total_commits">%2$s</xliff:g><br/><br/>
+                  <b>最後更新：</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
+-    <string name="anonymous_statistics_title">LineageOS 統計</string>
+-    <string name="anonymous_statistics_summary">加入匿名統計報告即可協助改進 LineageOS</string>
++    <string name="anonymous_statistics_title">Techzaster UI 統計</string>
++    <string name="anonymous_statistics_summary">加入匿名統計報告即可協助改進 Techzaster UI</string>
+     <string name="anonymous_statistics_warning_title">相關資訊</string>
+-    <string name="anonymous_statistics_warning">加入 LineageOS 統計將允許非個人資料被提交到 LineageOS 的開發人員，
++    <string name="anonymous_statistics_warning">加入 Techzaster UI 統計將允許非個人資料被提交到 Techzaster UI 的開發人員，
+         以追蹤每個裝置上的獨特安裝。提交的資訊包含一個唯一識別碼，此識別碼並不會泄露您的隱私或個人資料。
+         該資料在每次開機時被提交。\n\n輕觸預覽資料以預覽被提交資料的範例。</string>
+     <string name="enable_reporting_title">啟用報告</string>
+diff --git a/res/values/arrays.xml b/res/values/arrays.xml
+index f9a2e36..71db876 100644
+--- a/res/values/arrays.xml
++++ b/res/values/arrays.xml
+@@ -363,4 +363,11 @@
+         <item>3</item>
+     </string-array>
+ 
++
++    <string-array name="techzaster_qs_columns_entries">
++        <item>1</item><item>2</item><item>3</item><item>4</item><item>5</item>
++    </string-array>
++    <string-array name="techzaster_qs_columns_values">
++        <item>1</item><item>2</item><item>3</item><item>4</item><item>5</item>
++    </string-array>
+ </resources>
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index dc0ceb0..f2a61a8 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!--
+ 	Copyright (C) 2015 The CyanogenMod Project
+-	Copyright (C) 2017-2018 The LineageOS Project
++	Copyright (C) 2017-2018 The Techzaster UI Project
+ 
+ 	Licensed under the Apache License, Version 2.0 (the "License");
+ 	you may not use this file except in compliance with the License.
+@@ -17,7 +17,7 @@
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+ 
+-    <string name="cmparts_title">LineageOS Settings</string>
++    <string name="cmparts_title">Techzaster UI Settings</string>
+ 
+     <!-- Generic stuff used everywhere -->
+     <string name="loading">Loading\u2026</string>
+@@ -42,7 +42,7 @@
+ 
+     <!-- Privacy Settings Header item -->
+     <string name="privacy_settings_title">Privacy</string>
+-    <string name="privacy_settings_category" translatable="false">LineageOS</string>
++    <string name="privacy_settings_category" translatable="false">Techzaster UI</string>
+ 
+     <!-- Privacy Guard -->
+     <string name="privacy_guard_switch_label">Enable Privacy Guard</string>
+@@ -434,6 +434,9 @@
+ 
+     <!-- Status bar -->
+     <string name="status_bar_title">Status bar</string>
++    <string name="techzaster_toolbox_title">Techzaster UI Toolbox</string>
++    <string name="techzaster_qs_columns_title">Tiles per row</string>
++    <string name="toolbox_qs_columns_title">Tiles per row</string>
+     <string name="status_bar_quick_qs_pulldown_title">Quick pulldown</string>
+     <string name="status_bar_quick_qs_pulldown_summary">%1$s edge of the status bar pulls down Quick Settings</string>
+     <string name="status_bar_quick_qs_pulldown_summary_left">Left</string>
+@@ -535,11 +538,11 @@
+ 
+     <!-- Anonymous Statistics #CM -->
+     <!-- About device screen, list item title. Takes the user to the screen about opting in or out of anonymous statistics. -->
+-    <string name="anonymous_statistics_title">LineageOS statistics</string>
+-    <string name="anonymous_statistics_summary">Help make LineageOS better by opting into anonymous statistics reporting</string>
++    <string name="anonymous_statistics_title">Techzaster UI statistics</string>
++    <string name="anonymous_statistics_summary">Help make Techzaster UI better by opting into anonymous statistics reporting</string>
+     <string name="anonymous_statistics_warning_title">About</string>
+-    <string name="anonymous_statistics_warning">Opting into LineageOS Statistics will allow non-personal data to be submitted to the
+-        developers of LineageOS to track unique installations across devices. The information submitted includes an unique identifier,
++    <string name="anonymous_statistics_warning">Opting into Techzaster UI Statistics will allow non-personal data to be submitted to the
++        developers of Techzaster UI to track unique installations across devices. The information submitted includes an unique identifier,
+         which does not compromise your privacy or personal data. The data is submitted during each boot.\n\nFor an example of the data that is submitted, tap on Preview Data.</string>
+     <string name="enable_reporting_title">Enable reporting</string>
+     <string name="preview_data_title">Preview data</string>
+@@ -668,4 +671,6 @@
+     <string name="touchscreen_gesture_action_next_track">Skip to the next music track</string>
+     <string name="touchscreen_gesture_action_volume_down">Lower media volume</string>
+     <string name="touchscreen_gesture_action_volume_up">Raise media volume</string>
++    <string name="qs_grid_title">Quick Settings grid</string>
++    <string name="qs_grid_summary">Number of tiles per row</string>
+ </resources>
+diff --git a/res/xml/parts_catalog.xml b/res/xml/parts_catalog.xml
+index 71328eb..07e7987 100644
+--- a/res/xml/parts_catalog.xml
++++ b/res/xml/parts_catalog.xml
+@@ -74,10 +74,6 @@
+           android:fragment="org.cyanogenmod.cmparts.statusbar.StatusBarSettings"
+           cm:xmlRes="@xml/status_bar_settings" />
+ 
+-    <part android:key="cmstats"
+-          android:title="@string/anonymous_statistics_title"
+-          android:fragment="org.cyanogenmod.cmparts.cmstats.AnonymousStats"
+-          cm:xmlRes="@xml/anonymous_stats" />
+ 
+     <part android:key="power_menu"
+           android:title="@string/power_menu_title"
+@@ -116,4 +112,10 @@
+           android:summary="@string/touchscreen_gesture_settings_summary"
+           android:fragment="org.cyanogenmod.cmparts.gestures.TouchscreenGestureSettings"
+           cm:xmlRes="@xml/touchscreen_gesture_settings" />
++
++    <part android:key="techzaster_toolbox"
++          android:title="@string/techzaster_toolbox_title"
++          android:fragment="org.cyanogenmod.cmparts.toolbox.ToolboxSettings"
++          cm:xmlRes="@xml/toolbox_settings" />
++
+ </parts-catalog>
+diff --git a/res/xml/privacy_settings.xml b/res/xml/privacy_settings.xml
+index 5ae923a..c97ad82 100644
+--- a/res/xml/privacy_settings.xml
++++ b/res/xml/privacy_settings.xml
+@@ -36,12 +36,5 @@
+             android:targetClass="com.android.settings.applications.ProtectedAppsActivity" />
+     </Preference>
+ 
+-    <!-- Anonymous statistics - (CMStats) -->
+-    <PreferenceScreen
+-        android:key="cmstats"
+-        android:title="@string/anonymous_statistics_title"
+-        android:summary="@string/anonymous_statistics_summary"
+-        android:fragment="org.cyanogenmod.cmparts.cmstats.AnonymousStats" >
+-    </PreferenceScreen>
+ 
+ </PreferenceScreen>
+diff --git a/res/xml/qs_grid_settings.xml b/res/xml/qs_grid_settings.xml
+new file mode 100644
+index 0000000..1c64bbc
+--- /dev/null
++++ b/res/xml/qs_grid_settings.xml
+@@ -0,0 +1,16 @@
++<?xml version="1.0" encoding="utf-8"?>
++<PreferenceScreen
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    android:key="qs_grid_settings"
++    android:title="@string/qs_grid_title">
++
++    <ListPreference
++        android:key="qs_grid_columns"
++        android:title="@string/techzaster_qs_columns_title"
++        android:summary="%s"
++        android:dialogTitle="@string/techzaster_qs_columns_title"
++        android:entries="@array/techzaster_qs_columns_entries"
++        android:entryValues="@array/techzaster_qs_columns_values"
++        android:persistent="false" />
++
++</PreferenceScreen>
+diff --git a/res/xml/status_bar_settings.xml b/res/xml/status_bar_settings.xml
+index 020dcfa..86576a8 100644
+--- a/res/xml/status_bar_settings.xml
++++ b/res/xml/status_bar_settings.xml
+@@ -34,6 +34,12 @@
+         android:title="@string/network_traffic_settings_title"
+         android:summary="@string/network_traffic_settings_summary" />
+ 
++    <PreferenceScreen
++        android:fragment="org.cyanogenmod.cmparts.statusbar.QsGridSettings"
++        android:key="qs_grid_settings"
++        android:title="@string/qs_grid_title"
++        android:summary="@string/qs_grid_summary" />
++
+     <PreferenceCategory
+         android:title="@string/status_bar_icons_title">
+ 
+@@ -48,7 +54,7 @@
+             android:title="@string/status_bar_system_icons_title"
+             android:summary="@string/status_bar_system_icons_summary">
+             <intent android:action="com.android.settings.action.STATUS_BAR_TUNER" />
+-        </PreferenceScreen>
++</PreferenceScreen>
+ 
+     </PreferenceCategory>
+ 
+@@ -127,5 +133,4 @@
+             android:summary="@string/status_bar_toggle_brightness_summary"
+             android:defaultValue="false" />
+     </PreferenceCategory>
+-
+ </PreferenceScreen>
+diff --git a/res/xml/toolbox_settings.xml b/res/xml/toolbox_settings.xml
+new file mode 100644
+index 0000000..98ea75c
+--- /dev/null
++++ b/res/xml/toolbox_settings.xml
+@@ -0,0 +1,49 @@
++<?xml version="1.0" encoding="utf-8"?>
++<PreferenceScreen
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    android:key="techzaster_toolbox"
++    android:title="@string/techzaster_toolbox_title">
++
++
++
++    <PreferenceScreen
++        android:key="toolbox_status_bar"
++        android:title="@string/status_bar_title"
++        android:fragment="org.cyanogenmod.cmparts.statusbar.StatusBarSettings" />
++
++    <PreferenceScreen
++        android:key="toolbox_power_menu"
++        android:title="@string/power_menu_title"
++        android:fragment="org.cyanogenmod.cmparts.input.PowerMenuActions" />
++
++    <PreferenceScreen
++        android:key="toolbox_display_rotation"
++        android:title="@string/display_rotation_title"
++        android:fragment="org.cyanogenmod.cmparts.hardware.DisplayRotation" />
++
++    <PreferenceScreen
++        android:key="toolbox_privacy_guard"
++        android:title="@*cyanogenmod.platform:string/privacy_guard_manager_title"
++        android:fragment="org.cyanogenmod.cmparts.privacyguard.PrivacyGuardManager" />
++
++    <PreferenceScreen
++        android:key="toolbox_perf_profile"
++        android:title="@string/perf_profile_settings_title"
++        android:fragment="org.cyanogenmod.cmparts.power.PerfProfileSettings" />
++
++    <PreferenceScreen
++        android:key="toolbox_expanded_desktop"
++        android:title="@string/expanded_desktop_settings_title"
++        android:fragment="org.cyanogenmod.cmparts.applications.ExpandedDesktopSettings" />
++
++    <PreferenceScreen
++        android:key="toolbox_battery_light"
++        android:title="@string/battery_light_title"
++        android:fragment="org.cyanogenmod.cmparts.notificationlight.BatteryLightSettings" />
++
++    <PreferenceScreen
++        android:key="toolbox_notification_light"
++        android:title="@string/notification_light_title"
++        android:fragment="org.cyanogenmod.cmparts.notificationlight.NotificationLightSettings" />
++
++</PreferenceScreen>
+diff --git a/src/org/cyanogenmod/cmparts/statusbar/QsGridSettings.java b/src/org/cyanogenmod/cmparts/statusbar/QsGridSettings.java
+new file mode 100644
+index 0000000..fe0264b
+--- /dev/null
++++ b/src/org/cyanogenmod/cmparts/statusbar/QsGridSettings.java
+@@ -0,0 +1,49 @@
++package org.cyanogenmod.cmparts.statusbar;
++
++import android.os.Bundle;
++import android.provider.Settings;
++import android.support.v7.preference.ListPreference;
++import android.support.v7.preference.Preference;
++import android.widget.Toast;
++
++import org.cyanogenmod.cmparts.R;
++import org.cyanogenmod.cmparts.SettingsPreferenceFragment;
++
++public class QsGridSettings extends SettingsPreferenceFragment
++        implements Preference.OnPreferenceChangeListener {
++
++    private static final String KEY_COLUMNS = "qs_grid_columns";
++    private static final String SETTING_COLUMNS = "techzaster_qs_columns";
++
++    private ListPreference mColumns;
++
++    @Override
++    public void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        addPreferencesFromResource(R.xml.qs_grid_settings);
++
++        mColumns = (ListPreference) findPreference(KEY_COLUMNS);
++        if (mColumns != null) {
++            int current = Settings.Secure.getInt(
++                    getActivity().getContentResolver(), SETTING_COLUMNS, 3);
++            mColumns.setValue(String.valueOf(current));
++            mColumns.setOnPreferenceChangeListener(this);
++        }
++    }
++
++    @Override
++    public boolean onPreferenceChange(Preference preference, Object newValue) {
++        if (preference == mColumns) {
++            try {
++                Settings.Secure.putInt(getActivity().getContentResolver(),
++                        SETTING_COLUMNS, Integer.parseInt((String) newValue));
++                return true;
++            } catch (Exception e) {
++                Toast.makeText(getActivity(), "Could not save the setting",
++                        Toast.LENGTH_SHORT).show();
++                return false;
++            }
++        }
++        return false;
++    }
++}
+diff --git a/src/org/cyanogenmod/cmparts/toolbox/ToolboxSettings.java b/src/org/cyanogenmod/cmparts/toolbox/ToolboxSettings.java
+new file mode 100644
+index 0000000..7fbc4fe
+--- /dev/null
++++ b/src/org/cyanogenmod/cmparts/toolbox/ToolboxSettings.java
+@@ -0,0 +1,15 @@
++package org.cyanogenmod.cmparts.toolbox;
++
++import android.os.Bundle;
++
++import org.cyanogenmod.cmparts.R;
++import org.cyanogenmod.cmparts.SettingsPreferenceFragment;
++
++public class ToolboxSettings extends SettingsPreferenceFragment {
++
++    @Override
++    public void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        addPreferencesFromResource(R.xml.toolbox_settings);
++    }
++}
+-- 
+2.53.0
+

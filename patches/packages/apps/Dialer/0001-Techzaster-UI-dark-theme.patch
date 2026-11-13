@@ -1,0 +1,49 @@
+From 182cac29212c7c97eccc88a59c609fa27d5282a9 Mon Sep 17 00:00:00 2001
+From: plmiki8 <350455311+PLmiki8@users.noreply.github.com>
+Date: Mon, 2 Nov 2026 17:37:20 +0100
+Subject: [PATCH] Techzaster UI: dark theme
+
+Change-Id: Idfa44f072328002328166923bf16e5993d3aa47f
+---
+ res/values/styles.xml            | 6 +++++-
+ res/values/techzaster_colors.xml | 4 ++++
+ 2 files changed, 9 insertions(+), 1 deletion(-)
+ create mode 100644 res/values/techzaster_colors.xml
+
+diff --git a/res/values/styles.xml b/res/values/styles.xml
+index 6753aede6..d64e97513 100644
+--- a/res/values/styles.xml
++++ b/res/values/styles.xml
+@@ -15,7 +15,7 @@
+   ~ limitations under the License
+   -->
+ <resources>
+-    <style name="DialtactsTheme" parent="Theme.AppCompat.Light">
++    <style name="DialtactsTheme" parent="Theme.AppCompat">
+         <item name="android:textColorPrimary">@color/dialtacts_primary_text_color</item>
+         <item name="android:textColorSecondary">@color/dialtacts_secondary_text_color</item>
+ 
+@@ -121,6 +121,10 @@
+ 
+     <!-- Hide the actionbar title during the activity preview -->
+     <style name="DialtactsActivityTheme" parent="DialtactsTheme">
++        <item name="android:windowBackground">@color/techzaster_qs_background</item>
++        <item name="android:colorBackground">#263238</item>
++        <item name="android:textColorPrimary">#FFFFFFFF</item>
++        <item name="android:textColorSecondary">#B3FFFFFF</item>
+         <!-- Styles that require AppCompat compatibility, remember to update both sets -->
+         <item name="android:actionBarStyle">@style/DialtactsActionBarWithoutTitleStyle</item>
+         <item name="actionBarStyle">@style/DialtactsActionBarWithoutTitleStyle</item>
+diff --git a/res/values/techzaster_colors.xml b/res/values/techzaster_colors.xml
+new file mode 100644
+index 000000000..2f4d3a466
+--- /dev/null
++++ b/res/values/techzaster_colors.xml
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <color name="techzaster_qs_background">#263238</color>
++</resources>
+-- 
+2.53.0
+

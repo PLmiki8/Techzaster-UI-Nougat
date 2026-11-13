@@ -1,0 +1,26 @@
+From 41fb9800c83068bf93c1d1d507b80e0c99beb9dc Mon Sep 17 00:00:00 2001
+From: plmiki8 <350455311+PLmiki8@users.noreply.github.com>
+Date: Mon, 2 Nov 2026 17:37:20 +0100
+Subject: [PATCH] Techzaster UI: dark theme
+
+Change-Id: I0517124c7f162b2c68ef99a01dd9b8f6db73b08b
+---
+ res/values/styles.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/res/values/styles.xml b/res/values/styles.xml
+index ebc975da9..fca6bb793 100644
+--- a/res/values/styles.xml
++++ b/res/values/styles.xml
+@@ -317,7 +317,7 @@
+         <item name="android:background">@drawable/bg_pressed</item>
+     </style>
+ 
+-    <style name="AppTheme" parent="Theme.AppCompat.Light">
++    <style name="AppTheme" parent="Theme.AppCompat">
+         <item name="android:windowDisablePreview">true</item>
+         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+         <item name="android:windowBackground">@android:color/black</item>
+-- 
+2.53.0
+

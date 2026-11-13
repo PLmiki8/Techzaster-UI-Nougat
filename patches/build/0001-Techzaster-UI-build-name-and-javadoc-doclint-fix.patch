@@ -1,0 +1,46 @@
+From bc8a5d6e2fe67ccd578f6d5a060898ee6b039c48 Mon Sep 17 00:00:00 2001
+From: plmiki8 <350455311+PLmiki8@users.noreply.github.com>
+Date: Mon, 2 Nov 2026 17:37:18 +0100
+Subject: [PATCH] Techzaster UI: build name and javadoc doclint fix
+
+Change-Id: Ib6f108f46e552561ab999b8198e97c373fdb28f7
+---
+ core/Makefile    | 4 ++--
+ core/droiddoc.mk | 2 ++
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/core/Makefile b/core/Makefile
+index 3fb424733..6d91b3b8c 100644
+--- a/core/Makefile
++++ b/core/Makefile
+@@ -194,7 +194,7 @@ ifeq ($(TARGET_BUILD_VARIANT),user)
+   endif
+ else
+   # Non-user builds should show detailed build information
+-  BUILD_DISPLAY_ID := $(build_desc)
++  BUILD_DISPLAY_ID := $(TECHZASTER_BUILD_NAME)
+ endif
+ 
+ # Accepts a whitespace separated list of product locales such as
+@@ -2222,7 +2222,7 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE)
+ 	   $(if $(OEM_OTA_CONFIG), -o $(OEM_OTA_CONFIG)) \
+ 	   $(BUILT_TARGET_FILES_PACKAGE) $@
+ 
+-CM_TARGET_PACKAGE := $(PRODUCT_OUT)/lineage-$(LINEAGE_VERSION).zip
++CM_TARGET_PACKAGE := $(PRODUCT_OUT)/$(TECHZASTER_BUILD_NAME).zip
+ 
+ .PHONY: otapackage bacon
+ otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
+diff --git a/core/droiddoc.mk b/core/droiddoc.mk
+index f1435790f..79547859c 100644
+--- a/core/droiddoc.mk
++++ b/core/droiddoc.mk
+@@ -255,3 +255,5 @@ $(LOCAL_MODULE)-docs.zip : $(out_zip)
+ $(call dist-for-goals,docs,$(out_zip))
+ 
+ endif
++
++LOCAL_DROIDDOC_OPTIONS += -Xdoclint:none
+-- 
+2.53.0
+

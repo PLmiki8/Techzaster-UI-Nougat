@@ -1,0 +1,43 @@
+From 9be000e66b0add47d086c86f9cb3484782c63535 Mon Sep 17 00:00:00 2001
+From: plmiki8 <350455311+PLmiki8@users.noreply.github.com>
+Date: Mon, 2 Nov 2026 17:37:20 +0100
+Subject: [PATCH] Techzaster UI: dark theme
+
+Change-Id: I61a39587d32b31b186089e1fa455043b65d26ca2
+---
+ res/values/colors.xml | 1 +
+ res/values/styles.xml | 6 +++++-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/res/values/colors.xml b/res/values/colors.xml
+index 2c905e6..fef81f9 100644
+--- a/res/values/colors.xml
++++ b/res/values/colors.xml
+@@ -15,6 +15,7 @@
+      limitations under the License.
+ -->
+ <resources>
++    <color name="qs_background">#263238</color>
+     <!-- Material -->
+     <color name="primary">#333333</color>
+     <color name="primary_dark">#282828</color>
+diff --git a/res/values/styles.xml b/res/values/styles.xml
+index b942e5e..d038ead 100644
+--- a/res/values/styles.xml
++++ b/res/values/styles.xml
+@@ -16,7 +16,11 @@
+ -->
+ <resources xmlns:android="http://schemas.android.com/apk/res/android">
+     <!-- Main Material -->
+-    <style name="Eleven.Theme" parent="@android:style/Theme.Material.Light.DarkActionBar">
++    <style name="Eleven.Theme" parent="@android:style/Theme.Material">
++        <item name="android:windowBackground">@color/qs_background</item>
++        <item name="android:colorBackground">#263238</item>
++        <item name="android:textColorPrimary">#FFFFFFFF</item>
++        <item name="android:textColorSecondary">#B3FFFFFF</item>
+         <item name="android:windowContentOverlay">@null</item>
+         <item name="android:popupMenuStyle">@style/PopupMenu</item>
+         <item name="android:dropDownListViewStyle">@style/DropDownListView</item>
+-- 
+2.53.0
+

@@ -1,0 +1,33 @@
+From 6ec36a225a7a165d9d638bfb050bd2e8f41a27d2 Mon Sep 17 00:00:00 2001
+From: plmiki8 <350455311+PLmiki8@users.noreply.github.com>
+Date: Mon, 2 Nov 2026 17:37:20 +0100
+Subject: [PATCH] Techzaster UI: dark keyboard by default
+
+Change-Id: I8c9ac52f621b4aa320f2ec9c6317978b0c4f12ac
+---
+ .../com/android/inputmethod/keyboard/KeyboardTheme.java   | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/java/src/com/android/inputmethod/keyboard/KeyboardTheme.java b/java/src/com/android/inputmethod/keyboard/KeyboardTheme.java
+index 006d08696..eb168d5c4 100644
+--- a/java/src/com/android/inputmethod/keyboard/KeyboardTheme.java
++++ b/java/src/com/android/inputmethod/keyboard/KeyboardTheme.java
+@@ -54,11 +54,11 @@ public final class KeyboardTheme implements Comparable<KeyboardTheme> {
+                 // Default theme for ICS, JB, and KLP.
+                 VERSION_CODES.ICE_CREAM_SANDWICH),
+         new KeyboardTheme(THEME_ID_LXX_LIGHT, "LXXLight", R.style.KeyboardTheme_LXX_Light,
+-                // Default theme for LXX.
+-                Build.VERSION_CODES.LOLLIPOP),
+-        new KeyboardTheme(THEME_ID_LXX_DARK, "LXXDark", R.style.KeyboardTheme_LXX_Dark,
+-                // This has never been selected as default theme.
++                // Light is no longer the default theme.
+                 VERSION_CODES.BASE),
++        new KeyboardTheme(THEME_ID_LXX_DARK, "LXXDark", R.style.KeyboardTheme_LXX_Dark,
++                // Default theme for LXX (Techzaster UI).
++                Build.VERSION_CODES.LOLLIPOP),
+     };
+ 
+     static {
+-- 
+2.53.0
+

@@ -1,0 +1,323 @@
+From a51d1092be998bd412a14a3c927b2a48e7de4a3a Mon Sep 17 00:00:00 2001
+From: plmiki8 <350455311+PLmiki8@users.noreply.github.com>
+Date: Mon, 2 Nov 2026 17:37:19 +0100
+Subject: [PATCH] Techzaster UI: rebrand, dark theme, remove Lineage features
+ step
+
+Change-Id: I5806d3c7cf5afa573840aeef381f3f79cbd4e678
+---
+ res/drawable/cross.xml           |  2 +-
+ res/drawable/ic_datetime.xml     |  2 +-
+ res/drawable/ic_features.xml     |  2 +-
+ res/drawable/ic_fingerprint.xml  |  2 +-
+ res/drawable/ic_locale.xml       |  2 +-
+ res/drawable/ic_location.xml     |  2 +-
+ res/drawable/ic_lock_screen.xml  |  2 +-
+ res/drawable/ic_mobile_data.xml  |  4 +--
+ res/drawable/ic_sim.xml          |  2 +-
+ res/drawable/logo.xml            | 46 +++-----------------------------
+ res/drawable/tick.xml            |  2 +-
+ res/drawable/timelapse.xml       |  2 +-
+ res/raw/cm_wizard_script.xml     |  4 ---
+ res/values/colors.xml            | 14 +++++-----
+ res/values/styles.xml            | 10 ++++---
+ res/values/techzaster_colors.xml |  4 +++
+ 16 files changed, 33 insertions(+), 69 deletions(-)
+ create mode 100644 res/values/techzaster_colors.xml
+
+diff --git a/res/drawable/cross.xml b/res/drawable/cross.xml
+index 5a1b3e4..84f5f4e 100644
+--- a/res/drawable/cross.xml
++++ b/res/drawable/cross.xml
+@@ -21,7 +21,7 @@
+     android:viewportHeight="24">
+ 
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:pathData="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59
+ 19 19 17.59 13.41 12z" />
+     <path
+diff --git a/res/drawable/ic_datetime.xml b/res/drawable/ic_datetime.xml
+index 60ecaee..fca532c 100644
+--- a/res/drawable/ic_datetime.xml
++++ b/res/drawable/ic_datetime.xml
+@@ -23,7 +23,7 @@
+     <path
+         android:pathData="M0 0h24v24H0z" />
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:pathData="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99 .9 -1.99 2L3 19c0 1.1 .89 2 2 2h14c1.1 0
+ 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
+ </vector>
+diff --git a/res/drawable/ic_features.xml b/res/drawable/ic_features.xml
+index 6db917e..db23cb0 100644
+--- a/res/drawable/ic_features.xml
++++ b/res/drawable/ic_features.xml
+@@ -23,7 +23,7 @@
+     <path
+         android:pathData="M0 0h24v24H0V0z" />
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:pathData="M11.8 12.5v-1l1.1-.8c.1-.1 .1 -.2 .1 -.3l-1-1.7c-.1-.1-.2-.2-.3-.1l-1.3 .4
+ c-.3-.2-.6-.4-.9-.5l-.2-1.3c0-.1-.1-.2-.3-.2H7c-.1 0-.2 .1 -.3 .2 l-.2 1.3c-.3
+ .1 -.6 .3 -.9 .5 l-1.3-.5c-.1 0-.2 0-.3 .1 l-1 1.7c-.1 .1 0 .2 .1 .3l1.1 .8
+diff --git a/res/drawable/ic_fingerprint.xml b/res/drawable/ic_fingerprint.xml
+index 3a004d6..1325f47 100644
+--- a/res/drawable/ic_fingerprint.xml
++++ b/res/drawable/ic_fingerprint.xml
+@@ -21,7 +21,7 @@
+     android:viewportHeight="24">
+ 
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:pathData="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86 .47
+ -5.57 1.41-.24 .13 -.54 .04 -.68-.2-.13-.24-.04-.55 .2 -.68C7.82 2.52 9.86 2
+ 12.01 2c2.13 0 3.99 .47 6.03 1.52 .25 .13 .34 .43 .21 .67-.09 .18 -.26 .28 -.44
+diff --git a/res/drawable/ic_locale.xml b/res/drawable/ic_locale.xml
+index ed4def4..8477be8 100644
+--- a/res/drawable/ic_locale.xml
++++ b/res/drawable/ic_locale.xml
+@@ -23,7 +23,7 @@
+     <path
+         android:pathData="M0 0h24v24H0z" />
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:pathData="M12.87 15.07l-2.54-2.51 .03 -.03c1.74-1.94 2.98-4.17
+ 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3
+ 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11 .76
+diff --git a/res/drawable/ic_location.xml b/res/drawable/ic_location.xml
+index 1ed1f43..c5a6d5e 100644
+--- a/res/drawable/ic_location.xml
++++ b/res/drawable/ic_location.xml
+@@ -21,7 +21,7 @@
+     android:viewportHeight="24">
+ 
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:pathData="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0
+ 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+     <path
+diff --git a/res/drawable/ic_lock_screen.xml b/res/drawable/ic_lock_screen.xml
+index dc90227..3852620 100644
+--- a/res/drawable/ic_lock_screen.xml
++++ b/res/drawable/ic_lock_screen.xml
+@@ -23,7 +23,7 @@
+     <path
+         android:pathData="M0 0h24v24H0z" />
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:pathData="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1 .9 2 2
+ 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9
+ 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+diff --git a/res/drawable/ic_mobile_data.xml b/res/drawable/ic_mobile_data.xml
+index f0e620e..3cc0599 100644
+--- a/res/drawable/ic_mobile_data.xml
++++ b/res/drawable/ic_mobile_data.xml
+@@ -21,10 +21,10 @@
+     android:viewportHeight="24">
+ 
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:fillAlpha=".3"
+         android:pathData="M2 22h20V2z" />
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:pathData="M17 7L2 22h15z" />
+ </vector>
+diff --git a/res/drawable/ic_sim.xml b/res/drawable/ic_sim.xml
+index d4519d5..d80f759 100644
+--- a/res/drawable/ic_sim.xml
++++ b/res/drawable/ic_sim.xml
+@@ -21,7 +21,7 @@
+     android:viewportHeight="24">
+ 
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:pathData="M19.99 4c0-1.1-.89-2-1.99-2h-8L4 8v12c0 1.1 .9 2 2 2h12.01c1.1 0 1.99-.9
+ 1.99-2l-.01-16zM9 19H7v-2h2v2zm8 0h-2v-2h2v2zm-8-4H7v-4h2v4zm4
+ 4h-2v-4h2v4zm0-6h-2v-2h2v2zm4 2h-2v-4h2v4z" />
+diff --git a/res/drawable/logo.xml b/res/drawable/logo.xml
+index a17c0dd..fd8b511 100644
+--- a/res/drawable/logo.xml
++++ b/res/drawable/logo.xml
+@@ -1,51 +1,11 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<!--
+-    Copyright (c) 2017 The LineageOS Project
+-
+-    Licensed under the Apache License, Version 2.0 (the "License");
+-    you may not use this file except in compliance with the License.
+-    You may obtain a copy of the License at
+-
+-        http://www.apache.org/licenses/LICENSE-2.0
+-
+-    Unless required by applicable law or agreed to in writing, software
+-    distributed under the License is distributed on an "AS IS" BASIS,
+-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-    See the License for the specific language governing permissions and
+-    limitations under the License.
+--->
+ <vector xmlns:android="http://schemas.android.com/apk/res/android"
+     android:width="512dp"
+     android:height="320dp"
+     android:viewportWidth="512"
+     android:viewportHeight="320">
+-
+     <path
+-        android:fillColor="@color/accent"
+-        android:pathData="M157.89,271.64a1.83,1.83,0,0,1-1.89-1.89V248.42h4.65v19.32H171v3.9Z" />
+-    <path
+-        android:fillColor="@color/accent"
+-        android:pathData="M185,271.64V248.42h4.68v23.22Z" />
+-    <path
+-        android:fillColor="@color/accent"
+-        android:pathData="M221.17,248.42h4.26v22a1.23,1.23,0,0,1-.67,1.09,3.17,3.17,0,0,1-1.67 .41
+-,4,4,0,0,1-1.71-.29,3.11,3.11,0,0,1-1.12-1L210,256v15.61h-4.32v-21.5a1.56,1.56,0,0,1,.68-1.4,3.18,3.18,0,0,1,1.79-.46,3.59,3.59,0,0,1,1.9
+-.39 ,5.91,5.91,0,0,1,1.41,1.56l9.72,13.59Z" />
+-    <path
+-        android:fillColor="@color/accent"
+-        android:pathData="M256.9,252.36H246.2v5.5h9.63v3.93H246.2v5.89H256.6v4H241.51V250.31a1.74,1.74,0,0,1,.59-1.37,2,2,0,0,1,1.4-.52h13.4Z" />
+-    <path
+-        android:fillColor="@color/accent"
+-        android:pathData="M286.38,271.64l-2-5.76h-8.49l-2,5.76h-4.85l7.87-21.5q.68-1.85,3.15-1.85t3.19,1.89l7.87,21.46ZM277.27,262h5.82l-2.93-8.62Z" />
+-    <path
+-        android:fillColor="@color/accent"
+-        android:pathData="M314.33,272a11,11,0,0,1-8.36-3.19,11.93,11.93,0,0,1-3.06-8.62,12.12,12.12,0,0,1,3.25-8.89,11.56,11.56,0,0,1,8.62-3.3,11.44,11.44,0,0,1,6,1.5,9,9,0,0,1,3.63,3.93l-3.74,2q-1.69-3.41-6-3.41a6.53,6.53,0,0,0-5.14,2.16,8.58,8.58,0,0,0-1.92,5.9,8.67,8.67,0,0,0,1.79,5.8,6.11,6.11,0,0,0,4.91,2.1,6.74,6.74,0,0,0,4.6-1.58,5.26,5.26,0,0,0,1.87-4h-5.89v-3.67h10.5v2.57a10.19,10.19,0,0,1-3.12,7.72A11.12,11.12,0,0,1,314.33,272Z" />
+-    <path
+-        android:fillColor="@color/accent"
+-        android:pathData="M356,252.36H345.3v5.5h9.63v3.93H345.3v5.89h10.41v4H340.62V250.31a1.74,1.74,0,0,1,.59-1.37,2,2,0,0,1,1.4-.52H356Z" />
+-    <path
+-        android:fillColor="@color/accent"
+-        android:pathData="M416,128a39.92,39.92,0,0,0-31.11,14.87l-1.5-.6A294.79,294.79,0,0,0,336,128.14s0-.09,0-.14a80,80,0,1,0-160,0s0,.09,0,.13l-1.72
+-.38 a293.48,293.48,0,0,0-45.67,13.76l-1.5 .6
+-a40,40,0,1,0,7.39,14.28h0a277.33,277.33,0,0,1,43.1-13,80,80,0,0,0,156.73,0,277.3,277.3,0,0,1,43.11,13h0A40,40,0,1,0,416,128ZM96,192a24,24,0,1,1,24-24A24,24,0,0,1,96,192Zm160,0a64,64,0,1,1,64-64A64.07,64.07,0,0,1,256,192Zm160,0a24,24,0,1,1,24-24A24,24,0,0,1,416,192ZM288,128a32,32,0,1,1-32-32A32,32,0,0,1,288,128Z" />
++        android:name="logo_placeholder"
++        android:fillColor="#00000000"
++        android:pathData="M0,0 L1,0 L1,1 L0,1 Z" />
+ </vector>
+diff --git a/res/drawable/tick.xml b/res/drawable/tick.xml
+index c34dcc9..c6e1c05 100644
+--- a/res/drawable/tick.xml
++++ b/res/drawable/tick.xml
+@@ -23,6 +23,6 @@
+     <path
+         android:pathData="M0 0h24v24H0z" />
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:pathData="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+ </vector>
+diff --git a/res/drawable/timelapse.xml b/res/drawable/timelapse.xml
+index 5a1b3e4..84f5f4e 100644
+--- a/res/drawable/timelapse.xml
++++ b/res/drawable/timelapse.xml
+@@ -21,7 +21,7 @@
+     android:viewportHeight="24">
+ 
+     <path
+-        android:fillColor="@color/black"
++        android:fillColor="@color/white"
+         android:pathData="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59
+ 19 19 17.59 13.41 12z" />
+     <path
+diff --git a/res/raw/cm_wizard_script.xml b/res/raw/cm_wizard_script.xml
+index 486443e..bc4638c 100644
+--- a/res/raw/cm_wizard_script.xml
++++ b/res/raw/cm_wizard_script.xml
+@@ -54,10 +54,6 @@
+     </WizardAction>
+ 
+     <WizardAction wizard:uri="intent:#Intent;action=com.cyanogenmod.setupwizard.LINEAGE_LOCATION_SETTINGS;end" id="location_settings">
+-        <result wizard:action="lineage_settings" />
+-    </WizardAction>
+-
+-    <WizardAction wizard:uri="intent:#Intent;action=com.cyanogenmod.setupwizard.LINEAGE_SETTINGS;end" id="lineage_settings">
+         <result wizard:action="fingerprint_settings" />
+     </WizardAction>
+ 
+diff --git a/res/values/colors.xml b/res/values/colors.xml
+index 98020f4..882e57f 100644
+--- a/res/values/colors.xml
++++ b/res/values/colors.xml
+@@ -18,16 +18,16 @@
+ <resources>
+     <color name="black">#21272b</color>
+     <color name="white">#ffffff</color>
+-    <color name="page_background">#e4e7e9</color>
++    <color name="page_background">#ff263238</color>
+ 
+     <color name="primary">@color/page_background</color>
+-    <color name="primary_dark">#c2c5c7</color>
++    <color name="primary_dark">#ff1c262b</color>
+     <color name="accent">#167C80</color>
+-    <color name="primary_text">#8a000000</color>
+-    <color name="secondary_text">#42000000</color>
+-    <color name="button_bar_text_enabled">#ff1e1e1e</color>
+-    <color name="button_bar_text_disabled">#321e1e1e</color>
+-    <color name="divider">#40000000</color>
++    <color name="primary_text">#ffffffff</color>
++    <color name="secondary_text">#b3ffffff</color>
++    <color name="button_bar_text_enabled">#ffffffff</color>
++    <color name="button_bar_text_disabled">#4dffffff</color>
++    <color name="divider">#40ffffff</color>
+     <color name="header_bg">@color/primary</color>
+     <color name="header_condensed_bg">@color/primary</color>
+     <color name="button_bar_background">@color/primary</color>
+diff --git a/res/values/styles.xml b/res/values/styles.xml
+index 3aa373b..94bb899 100644
+--- a/res/values/styles.xml
++++ b/res/values/styles.xml
+@@ -15,7 +15,11 @@
+      limitations under the License.
+ -->
+ <resources>
+-    <style name="Theme.Setup" parent="@android:style/Theme.Material.Light">
++    <style name="Theme.Setup" parent="@android:style/Theme.Material">
++        <item name="android:windowBackground">@color/techzaster_qs_background</item>
++        <item name="android:colorBackground">#263238</item>
++        <item name="android:textColorPrimary">#FFFFFFFF</item>
++        <item name="android:textColorSecondary">#B3FFFFFF</item>
+         <item name="android:windowActionBar">false</item>
+         <item name="android:windowNoTitle">true</item>
+         <item name="android:windowIsTranslucent">true</item>
+@@ -26,7 +30,7 @@
+         <item name="android:textColorLink">@color/accent</item>
+         <item name="android:statusBarColor">@android:color/transparent</item>
+         <item name="android:windowAnimationStyle">@style/ActivityAnimations</item>
+-        <item name="android:windowLightStatusBar">true</item>
++        <item name="android:windowLightStatusBar">false</item>
+         <item name="localePickerStyle">@style/LocaleWidget.Material.LocalePicker</item>
+     </style>
+ 
+@@ -54,7 +58,7 @@
+     <style name="PageTitle">
+         <item name="android:id">@android:id/title</item>
+         <item name="android:textSize">20sp</item>
+-        <item name="android:textColor">@color/black</item>
++        <item name="android:textColor">@color/white</item>
+     </style>
+ 
+     <style name="PageSummaryText">
+diff --git a/res/values/techzaster_colors.xml b/res/values/techzaster_colors.xml
+new file mode 100644
+index 0000000..2f4d3a4
+--- /dev/null
++++ b/res/values/techzaster_colors.xml
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <color name="techzaster_qs_background">#263238</color>
++</resources>
+-- 
+2.53.0
+

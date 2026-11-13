@@ -1,0 +1,49 @@
+From fb339eb2d5600aa13dd34862e80d2fb0d051b7c9 Mon Sep 17 00:00:00 2001
+From: plmiki8 <350455311+PLmiki8@users.noreply.github.com>
+Date: Mon, 2 Nov 2026 17:37:20 +0100
+Subject: [PATCH] Techzaster UI: dark theme
+
+Change-Id: Ic5bb9602df522df1f9f1545aa0acc98ca56fec4c
+---
+ res/values/styles.xml            | 6 +++++-
+ res/values/techzaster_colors.xml | 4 ++++
+ 2 files changed, 9 insertions(+), 1 deletion(-)
+ create mode 100644 res/values/techzaster_colors.xml
+
+diff --git a/res/values/styles.xml b/res/values/styles.xml
+index 5f473ad..2ea7ca9 100755
+--- a/res/values/styles.xml
++++ b/res/values/styles.xml
+@@ -19,7 +19,7 @@
+         Base application theme, dependent on API level. This theme is replaced
+         by BugleBaseTheme from res/values-vXX/styles.xml on newer devices.
+     -->
+-    <style name="BugleBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
++    <style name="BugleBaseTheme" parent="Theme.AppCompat">
+         <!--
+             Theme customizations available in newer API levels can go in
+             res/values-vXX/styles.xml, while customizations related to
+@@ -30,6 +30,10 @@
+ 
+     <!-- Application theme. -->
+     <style name="BugleTheme" parent="BugleBaseTheme">
++        <item name="android:windowBackground">@color/techzaster_qs_background</item>
++        <item name="android:colorBackground">#263238</item>
++        <item name="android:textColorPrimary">#FFFFFFFF</item>
++        <item name="android:textColorSecondary">#B3FFFFFF</item>
+         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+          <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
+          <item name="colorPrimary">@color/action_bar_background_color</item>
+diff --git a/res/values/techzaster_colors.xml b/res/values/techzaster_colors.xml
+new file mode 100644
+index 0000000..2f4d3a4
+--- /dev/null
++++ b/res/values/techzaster_colors.xml
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <color name="techzaster_qs_background">#263238</color>
++</resources>
+-- 
+2.53.0
+

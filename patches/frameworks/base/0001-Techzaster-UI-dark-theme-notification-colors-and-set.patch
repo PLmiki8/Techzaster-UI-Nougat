@@ -1,0 +1,354 @@
+From 41e13af4002c420477d30e030c841de1a54b6d94 Mon Sep 17 00:00:00 2001
+From: plmiki8 <350455311+PLmiki8@users.noreply.github.com>
+Date: Mon, 2 Nov 2026 17:37:18 +0100
+Subject: [PATCH] Techzaster UI: dark theme, notification colors and settings
+ defaults
+
+Change-Id: If0bd2d7345ef33a06d8058214313112c85316e28
+---
+ core/res/res/values/colors.xml                | 12 ++++++------
+ .../res/res/values/colors_device_defaults.xml |  4 ++--
+ core/res/res/values/colors_material.xml       | 16 ++++++++--------
+ core/res/res/values/styles_material.xml       |  4 ++--
+ packages/DocumentsUI/res/values/colors.xml    | 12 ++++++------
+ packages/DocumentsUI/res/values/styles.xml    |  2 +-
+ .../SettingsProvider/res/values/defaults.xml  |  7 +++++--
+ .../providers/settings/DatabaseHelper.java    |  8 ++++++++
+ .../res/drawable/qs_background_primary.xml    |  2 +-
+ packages/SystemUI/res/values/colors.xml       | 12 ++++++------
+ .../com/android/systemui/qs/TileLayout.java   | 19 +++++++++++++++++--
+ .../statusbar/phone/ScrimController.java      |  2 +-
+ 12 files changed, 63 insertions(+), 37 deletions(-)
+
+diff --git a/core/res/res/values/colors.xml b/core/res/res/values/colors.xml
+index de86cefb5bc..a8b13f4646f 100644
+--- a/core/res/res/values/colors.xml
++++ b/core/res/res/values/colors.xml
+@@ -129,18 +129,18 @@
+ 
+     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
+     <drawable name="notification_template_icon_low_bg">#0cffffff</drawable>
+-    <drawable name="notification_template_divider">#29000000</drawable>
++    <drawable name="notification_template_divider">#29ffffff</drawable>
+     <drawable name="notification_template_divider_media">#29ffffff</drawable>
+ 
+-    <color name="notification_material_background_color">#ffffffff</color>
++    <color name="notification_material_background_color">#ff37474f</color>
+ 
+-    <color name="notification_default_color">#757575</color> <!-- Gray 600 -->
++    <color name="notification_default_color">#ffb0bec5</color> <!-- Gray 600 -->
+     <color name="notification_icon_default_color">@color/notification_default_color</color>
+ 
+-    <color name="notification_progress_background_color">@color/secondary_text_material_light</color>
++    <color name="notification_progress_background_color">#66ffffff</color>
+ 
+-    <color name="notification_action_list">#ffeeeeee</color>
+-    <color name="notification_action_list_dark">#ffe0e0e0</color>
++    <color name="notification_action_list">#ff455a64</color>
++    <color name="notification_action_list_dark">#ff455a64</color>
+ 
+     <!-- Keyguard colors -->
+     <color name="keyguard_avatar_frame_color">#ffffffff</color>
+diff --git a/core/res/res/values/colors_device_defaults.xml b/core/res/res/values/colors_device_defaults.xml
+index 8f0350a887b..d40993d8319 100644
+--- a/core/res/res/values/colors_device_defaults.xml
++++ b/core/res/res/values/colors_device_defaults.xml
+@@ -29,8 +29,8 @@
+     <color name="quaternary_device_default_settings">@color/quaternary_material_settings</color>
+ 
+     <color name="accent_device_default_700">@color/accent_material_700</color>
+-    <color name="accent_device_default_light">@color/accent_material_light</color>
+-    <color name="accent_device_default_dark">@color/accent_material_dark</color>
++    <color name="accent_device_default_light">#FF263238</color>
++    <color name="accent_device_default_dark">#FF263238</color>
+     <color name="accent_device_default_50">@color/accent_material_50</color>
+ 
+     <color name="background_device_default_dark">@color/background_material_dark</color>
+diff --git a/core/res/res/values/colors_material.xml b/core/res/res/values/colors_material.xml
+index 4e4b88d4b97..46bbdb4c414 100644
+--- a/core/res/res/values/colors_material.xml
++++ b/core/res/res/values/colors_material.xml
+@@ -17,18 +17,18 @@
+ <!-- Colors specific to Material themes. -->
+ <resources>
+     <color name="foreground_material_dark">@color/white</color>
+-    <color name="foreground_material_light">@color/black</color>
++    <color name="foreground_material_light">@color/white</color>
+ 
+     <color name="background_material_dark">@color/material_grey_850</color>
+-    <color name="background_material_light">@color/material_grey_50</color>
++    <color name="background_material_light">#ff263238</color>
+     <color name="background_floating_material_dark">@color/material_grey_800</color>
+-    <color name="background_floating_material_light">@color/white</color>
++    <color name="background_floating_material_light">#ff37474f</color>
+ 
+     <color name="primary_material_dark">@color/material_grey_900</color>
+-    <color name="primary_material_light">@color/material_grey_100</color>
++    <color name="primary_material_light">#ff263238</color>
+     <color name="primary_material_settings">@color/material_grey_900</color>
+     <color name="primary_dark_material_dark">@color/black</color>
+-    <color name="primary_dark_material_light">@color/material_grey_600</color>
++    <color name="primary_dark_material_light">#ff1c262b</color>
+     <color name="primary_dark_material_light_light_status_bar">@color/material_grey_300</color>
+     <color name="primary_dark_material_settings">@color/black</color>
+ 
+@@ -42,7 +42,7 @@
+     <color name="accent_material_50">@color/material_deep_teal_50</color>
+ 
+     <color name="button_material_dark">#ff5a595b</color>
+-    <color name="button_material_light">#ffd6d7d7</color>
++    <color name="button_material_light">#ff455a64</color>
+ 
+     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
+     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
+@@ -53,9 +53,9 @@
+     <eat-comment />
+ 
+     <!-- 87% black -->
+-    <color name="primary_text_default_material_light">#de000000</color>
++    <color name="primary_text_default_material_light">#ffffffff</color>
+     <!-- 54% black -->
+-    <color name="secondary_text_default_material_light">#8a000000</color>
++    <color name="secondary_text_default_material_light">#b3ffffff</color>
+ 
+     <!-- 100% white -->
+     <color name="primary_text_default_material_dark">#ffffffff</color>
+diff --git a/core/res/res/values/styles_material.xml b/core/res/res/values/styles_material.xml
+index a1e12d281c9..368a0379f18 100644
+--- a/core/res/res/values/styles_material.xml
++++ b/core/res/res/values/styles_material.xml
+@@ -451,7 +451,7 @@ please see styles_device_defaults.xml.
+     </style>
+ 
+     <style name="TextAppearance.Material.Notification">
+-        <item name="textColor">@color/secondary_text_material_light</item>
++        <item name="textColor">#b3ffffff</item>
+         <item name="textSize">@dimen/notification_text_size</item>
+     </style>
+ 
+@@ -474,7 +474,7 @@ please see styles_device_defaults.xml.
+     <style name="TextAppearance.Material.Notification.Time" parent="TextAppearance.Material.Notification.Info" />
+ 
+     <style name="TextAppearance.Material.Notification.Emphasis">
+-        <item name="textColor">#66000000</item>
++        <item name="textColor">#66ffffff</item>
+     </style>
+ 
+     <style name="TextAppearance.Material.ListItem" parent="TextAppearance.Material.Subhead" />
+diff --git a/packages/DocumentsUI/res/values/colors.xml b/packages/DocumentsUI/res/values/colors.xml
+index 366a8a42dd1..46ff152fa67 100644
+--- a/packages/DocumentsUI/res/values/colors.xml
++++ b/packages/DocumentsUI/res/values/colors.xml
+@@ -18,9 +18,9 @@
+     <!-- This is the window background, but also the background for anything
+          else that needs to manually declare a background matching the "default"
+          app background (e.g. the drawer overlay). -->
+-    <color name="window_background">#fff1f1f1</color>
+-    <color name="drawer_background">#fff1f1f1</color>
+-    <color name="directory_background">#fff7f7f7</color>
++    <color name="window_background">#ff263238</color>
++    <color name="drawer_background">#ff263238</color>
++    <color name="directory_background">#ff2b3a41</color>
+     <color name="menu_search_background">@android:color/transparent</color>
+ 
+     <color name="primary_dark">@*android:color/primary_dark_device_default_settings</color>
+@@ -34,8 +34,8 @@
+     <color name="root_activated_color">@*android:color/accent_device_default_700</color>
+ 
+     <!-- TODO: Would be nice to move this to a color-set, but not sure how to support animation -->
+-    <color name="item_doc_background">#fffafafa</color>
+-    <color name="item_doc_background_disabled">#fff4f4f4</color>
+-    <color name="item_doc_background_selected">@*android:color/accent_device_default_50</color>
++    <color name="item_doc_background">#ff37474f</color>
++    <color name="item_doc_background_disabled">#ff2f3d44</color>
++    <color name="item_doc_background_selected">#ff455a64</color>
+ 
+ </resources>
+diff --git a/packages/DocumentsUI/res/values/styles.xml b/packages/DocumentsUI/res/values/styles.xml
+index b5e32d405ac..bd366bc22bd 100644
+--- a/packages/DocumentsUI/res/values/styles.xml
++++ b/packages/DocumentsUI/res/values/styles.xml
+@@ -19,7 +19,7 @@
+     <style name="ActionBarTheme" parent="@*android:style/ThemeOverlay.Material.Dark.ActionBar" />
+     <style name="ActionBarPopupTheme" parent="@*android:style/ThemeOverlay.Material.Light" />
+ 
+-    <style name="DocumentsTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
++    <style name="DocumentsTheme" parent="@style/Theme.AppCompat">
+         <item name="actionBarWidgetTheme">@null</item>
+         <item name="actionBarTheme">@style/ActionBarTheme</item>
+         <item name="actionBarPopupTheme">@style/ActionBarPopupTheme</item>
+diff --git a/packages/SettingsProvider/res/values/defaults.xml b/packages/SettingsProvider/res/values/defaults.xml
+index 9b50dc06df1..afed532e003 100644
+--- a/packages/SettingsProvider/res/values/defaults.xml
++++ b/packages/SettingsProvider/res/values/defaults.xml
+@@ -32,9 +32,11 @@
+     <!-- Default screen brightness, from 0 to 255.  102 is 40%. -->
+     <integer name="def_screen_brightness">102</integer>
+     <bool name="def_screen_brightness_automatic_mode">false</bool>
+-    <fraction name="def_window_animation_scale">100%</fraction>
+-    <fraction name="def_window_transition_scale">100%</fraction>
++    <fraction name="def_window_animation_scale">150%</fraction>
++    <fraction name="def_window_transition_scale">150%</fraction>
+     <bool name="def_haptic_feedback">true</bool>
++    <bool name="def_adb_enabled">true</bool>
++    <bool name="def_development_settings_enabled">true</bool>
+ 
+     <bool name="def_bluetooth_on">false</bool>
+     <bool name="def_wifi_display_on">false</bool>
+@@ -299,4 +301,5 @@
+     <string name="def_enable_input_methods" translatable="false"></string>
+     <!-- Default for Settings.Global.CAPTIVE_PORTAL_DETECTION_ENABLED -->
+     <integer name="def_captive_portal_detection_enabled" translatable="false">1</integer>
++    <string name="def_policy_control" translatable="false">immersive.full=*</string>
+ </resources>
+diff --git a/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java b/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
+index 0d00a4779ee..7aaa92ae531 100644
+--- a/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
++++ b/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
+@@ -2585,6 +2585,8 @@ class DatabaseHelper extends SQLiteOpenHelper {
+             // --- Previously in 'system'
+             loadBooleanSetting(stmt, Settings.Global.AIRPLANE_MODE_ON,
+                     R.bool.def_airplane_mode_on);
++            loadStringSetting(stmt, Settings.Global.POLICY_CONTROL,
++                    R.string.def_policy_control);
+ 
+             loadBooleanSetting(stmt, Settings.Global.THEATER_MODE_ON,
+                     R.bool.def_theater_mode_on);
+@@ -2619,6 +2621,12 @@ class DatabaseHelper extends SQLiteOpenHelper {
+             loadBooleanSetting(stmt, Settings.Global.PACKAGE_VERIFIER_ENABLE,
+                     R.bool.def_package_verifier_enable);
+ 
++        loadBooleanSetting(stmt, Settings.Global.ADB_ENABLED,
++                R.bool.def_adb_enabled);
++
++        loadBooleanSetting(stmt, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED,
++                R.bool.def_development_settings_enabled);
++
+             loadBooleanSetting(stmt, Settings.Global.WIFI_ON,
+                     R.bool.def_wifi_on);
+ 
+diff --git a/packages/SystemUI/res/drawable/qs_background_primary.xml b/packages/SystemUI/res/drawable/qs_background_primary.xml
+index 8ea9e063910..559551a1f90 100644
+--- a/packages/SystemUI/res/drawable/qs_background_primary.xml
++++ b/packages/SystemUI/res/drawable/qs_background_primary.xml
+@@ -15,6 +15,6 @@
+ -->
+ <inset xmlns:android="http://schemas.android.com/apk/res/android">
+     <shape>
+-        <solid android:color="?android:attr/colorPrimary"/>
++        <solid android:color="#B3000000"/>
+     </shape>
+ </inset>
+diff --git a/packages/SystemUI/res/values/colors.xml b/packages/SystemUI/res/values/colors.xml
+index 3bd12cffd78..1964290c7e2 100644
+--- a/packages/SystemUI/res/values/colors.xml
++++ b/packages/SystemUI/res/values/colors.xml
+@@ -77,13 +77,13 @@
+     <color name="notification_material_background_color">@*android:color/notification_material_background_color</color>
+ 
+     <!-- The color of the material notification background when dimmed -->
+-    <color name="notification_material_background_dimmed_color">#ccffffff</color>
++    <color name="notification_material_background_dimmed_color">#cc37474f</color>
+ 
+     <!-- The color of the material notification background when low priority -->
+-    <color name="notification_material_background_low_priority_color">#fff5f5f5</color>
++    <color name="notification_material_background_low_priority_color">#ff2f3d44</color>
+ 
+     <!-- The background color of the notification shade -->
+-    <color name="notification_shade_background_color">#ffeeeeee</color>
++    <color name="notification_shade_background_color">#ff263238</color>
+ 
+     <!-- The color of the ripples on the untinted notifications -->
+     <color name="notification_ripple_untinted_color">#28000000</color>
+@@ -98,11 +98,11 @@
+     <color name="notification_gear_color">#ff757575</color>
+ 
+     <!-- The "inside" of a notification, reached via longpress -->
+-    <color name="notification_guts_bg_color">#eeeeee</color>
++    <color name="notification_guts_bg_color">#ff37474f</color>
+     <color name="notification_guts_disabled_slider_color">@*android:color/material_grey_300</color>
+     <color name="notification_guts_secondary_slider_color">#858383</color>
+-    <color name="notification_guts_icon_tint">#8a000000</color>
+-    <color name="notification_guts_disabled_icon_tint">#4d000000</color>
++    <color name="notification_guts_icon_tint">#8affffff</color>
++    <color name="notification_guts_disabled_icon_tint">#4dffffff</color>
+ 
+     <color name="assist_orb_color">#ffffff</color>
+ 
+diff --git a/packages/SystemUI/src/com/android/systemui/qs/TileLayout.java b/packages/SystemUI/src/com/android/systemui/qs/TileLayout.java
+index a5a1eaaf666..2d66b3bc729 100644
+--- a/packages/SystemUI/src/com/android/systemui/qs/TileLayout.java
++++ b/packages/SystemUI/src/com/android/systemui/qs/TileLayout.java
+@@ -1,7 +1,10 @@
+ package com.android.systemui.qs;
+ 
++import com.android.systemui.tuner.TunerService;
++import com.android.systemui.tuner.TunerService.Tunable;
+ import android.content.Context;
+ import android.content.res.Resources;
++import android.provider.Settings;
+ import android.util.AttributeSet;
+ import android.view.View;
+ import android.view.ViewGroup;
+@@ -12,7 +15,7 @@ import com.android.systemui.qs.QSPanel.TileRecord;
+ 
+ import java.util.ArrayList;
+ 
+-public class TileLayout extends ViewGroup implements QSTileLayout {
++public class TileLayout extends ViewGroup implements QSTileLayout, Tunable {
+ 
+     private static final float TILE_ASPECT = 1.2f;
+ 
+@@ -35,6 +38,7 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
+         super(context, attrs);
+         setFocusableInTouchMode(true);
+         updateResources();
++        TunerService.get(context).addTunable(this, TECHZASTER_QS_COLUMNS);
+     }
+ 
+     @Override
+@@ -72,9 +76,13 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
+         super.removeAllViews();
+     }
+ 
++        private static final String TECHZASTER_QS_COLUMNS = "techzaster_qs_columns";
++
+     public boolean updateResources() {
+         final Resources res = mContext.getResources();
+-        final int columns = Math.max(1, res.getInteger(R.integer.quick_settings_num_columns));
++        final int defaultColumns = Math.max(1, res.getInteger(R.integer.quick_settings_num_columns));
++        final int columns = Settings.Secure.getInt(mContext.getContentResolver(),
++                TECHZASTER_QS_COLUMNS, defaultColumns);
+         mCellHeight = mContext.getResources().getDimensionPixelSize(R.dimen.qs_tile_height);
+         mCellMargin = res.getDimensionPixelSize(R.dimen.qs_tile_margin);
+         mCellMarginTop = res.getDimensionPixelSize(R.dimen.qs_tile_margin_top);
+@@ -132,6 +140,13 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
+         }
+     }
+ 
++    @Override
++    public void onTuningChanged(String key, String newValue) {
++        if (TECHZASTER_QS_COLUMNS.equals(key)) {
++            updateResources();
++        }
++    }
++
+     private int getRowTop(int row) {
+         return row * (mCellHeight + mCellMargin) + mCellMarginTop;
+     }
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/ScrimController.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/ScrimController.java
+index 9f2d446275d..0887c18ee92 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/ScrimController.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/ScrimController.java
+@@ -50,7 +50,7 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener,
+     public static final Interpolator KEYGUARD_FADE_OUT_INTERPOLATOR_LOCKED
+             = new PathInterpolator(0.3f, 0f, 0.8f, 1f);
+     private static final float SCRIM_BEHIND_ALPHA = 0.62f;
+-    protected static final float SCRIM_BEHIND_ALPHA_KEYGUARD = 0.45f;
++    protected static final float SCRIM_BEHIND_ALPHA_KEYGUARD = 0.0f;
+     protected static final float SCRIM_BEHIND_ALPHA_UNLOCKING = 0.2f;
+     private static final float SCRIM_IN_FRONT_ALPHA = 0.75f;
+     private static final float SCRIM_IN_FRONT_ALPHA_LOCKED = 0.85f;
+-- 
+2.53.0
+
