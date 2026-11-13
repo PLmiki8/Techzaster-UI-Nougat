@@ -35,7 +35,7 @@ Techzaster UI is LineageOS 14.1 with a set of patches (tested on Ubuntu 26.04 WS
 
     ~/Techzaster-UI-Nougat/scripts/apply.sh
     
-## 4.To Do Before Building
+## 4. To Do Before Building
 
 Python 2.7 is required: `pyenv install 2.7.18 && pyenv local 2.7.18` in the TechzasterUI folder
 
@@ -53,6 +53,7 @@ Paste this commands to fix other things:
 ## 6. Enjoy Techzaster UI Nougat
 
 In out/target/product/ is device folder with Techzaster UI zip to flash the ROM (needs custom recovery)
+
 
 
 
